@@ -211,6 +211,11 @@ namespace Fall2020_CSC403_Project
             tmrFinalBattle.Enabled = false;
         }
 
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }
