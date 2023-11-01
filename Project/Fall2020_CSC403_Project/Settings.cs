@@ -18,6 +18,7 @@ namespace Fall2020_CSC403_Project
         {
             InitializeComponent();
         }
+       
 
         private void InitializeComponent()
         {
@@ -72,6 +73,7 @@ namespace Fall2020_CSC403_Project
             this.BGMusicToggle.TabIndex = 4;
             this.BGMusicToggle.Text = "Toggle Background Music";
             this.BGMusicToggle.UseVisualStyleBackColor = true;
+            this.BGMusicToggle.Click += new System.EventHandler(this.BGMusicToggle_Click);
             // 
             // Settings
             // 
@@ -105,5 +107,10 @@ namespace Fall2020_CSC403_Project
         {
 
         }
+        private void BGMusicToggle_Click(object sender, EventArgs e)
+        {
+            FrmLevel.ToggleBackgroungMusic();
+        }
+
     }
 }

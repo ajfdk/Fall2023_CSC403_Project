@@ -19,7 +19,8 @@ namespace Fall2020_CSC403_Project
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
-        private SoundPlayer backgroundMusic;
+        private static SoundPlayer backgroundMusic;
+        private static bool IsMusicPlaying = true;
 
         public FrmLevel()
         {
@@ -44,6 +45,7 @@ namespace Fall2020_CSC403_Project
             enemyCheeto.Img = picEnemyCheeto.BackgroundImage;
 
             StartBackgroundMusic();
+            IsMusicPlaying = true;
 
             bossKoolaid.BackgroundColor = Color.Red;
             enemyPoisonPacket.BackgroundColor = Color.Green;
@@ -58,6 +60,20 @@ namespace Fall2020_CSC403_Project
 
             Game.player = player;
             timeBegin = DateTime.Now;
+        }
+
+        public static void ToggleBackgroungMusic()
+        {
+            if (IsMusicPlaying)
+            {
+                backgroundMusic.Stop();
+                IsMusicPlaying = false;
+            }
+            else
+            {
+                backgroundMusic.PlayLooping();
+                IsMusicPlaying=true;
+            }
         }
 
         public void StartBackgroundMusic()
