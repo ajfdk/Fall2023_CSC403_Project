@@ -59,6 +59,18 @@ namespace Fall2020_CSC403_Project.Properties {
                 resourceCulture = value;
             }
         }
+
+        ///<summary>
+        ///Looks up a Localized resource of type Sytem.Drawing.Bitmap
+        ///</summary>
+        internal static System.Drawing.Bitmap menucontrol
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("menucontrol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.

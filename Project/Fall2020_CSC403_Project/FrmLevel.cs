@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Media;
+using System.Drawing.Text;
 
 namespace Fall2020_CSC403_Project
 {
@@ -21,6 +22,7 @@ namespace Fall2020_CSC403_Project
         private FrmBattle frmBattle;
         private static SoundPlayer backgroundMusic;
         private static bool IsMusicPlaying = true;
+        private bool pause = true;
 
         public FrmLevel()
         {
@@ -107,7 +109,10 @@ namespace Fall2020_CSC403_Project
         private void tmrPlayerMove_Tick(object sender, EventArgs e)
         {
             // move player
-            player.Move();
+            if (pause == false)
+            {
+                player.Move();
+            }
 
             // check collision with walls
             if (HitAWall(player))
@@ -209,12 +214,32 @@ namespace Fall2020_CSC403_Project
                     CharacterScreen character = new CharacterScreen();
                     character.Show();
                     break;
-
+                case Keys.M:
+                    pause = true;
+                    Menu();
+                    break;
                 default:
                     player.ResetMoveSpeed();
                     break;
             }
         }
+                private void Menu()
+                {
+                    if (playcontrolmenu.Visible != true)
+                    {
+                        playcontrolmenu.Enabled = true;
+                        playcontrolmenu.Visible = true;
+                    }
+                    else
+                    {
+                        playcontrolmenu.Enabled = false;
+                        playcontrolmenu.Visible = false;
+
+                    }
+                }
+
+            
+        
 
         private void lblInGameTime_Click(object sender, EventArgs e)
         {
@@ -239,5 +264,37 @@ namespace Fall2020_CSC403_Project
         {
             // place opener for settings here.
         }
+
+        private void playcontrolmenu_Click_1(object sender, EventArgs e)
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+            Point coordinates = me.Location;
+            if (119 < coordinates.X && coordinates.X < 290 && 242 < coordinates.Y && coordinates.Y < 285)
+            //(123 < coordinates.X && coordinates.X < 291 && 180 < coordinates.Y && coordinates.Y < 226)
+            {
+                pause = false;
+                Menu();
+
+            }
+            else if (119 < coordinates.X && coordinates.X < 290 && 290 < coordinates.Y && coordinates.Y < 340)
+            //(119 < coordinates.X && coordinates.X < 290 && 242 < coordinates.Y && coordinates.Y < 285)
+            {
+                this.Close();
+            }
+        }
+            
+        private void StartGame()
+        {
+
+        }
+        private void CloseGame()
+            {
+                this.Close();
+            }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+            {
+                CloseGame();
+            }
+        }
     }
-}

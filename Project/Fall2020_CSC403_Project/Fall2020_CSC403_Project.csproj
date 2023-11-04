@@ -183,5 +183,8 @@
   <ItemGroup>
     <None Include="Resources\settings_icon_resize.png" />
   </ItemGroup>
+  <ItemGroup>
+  <None Include="data\menucontrol.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

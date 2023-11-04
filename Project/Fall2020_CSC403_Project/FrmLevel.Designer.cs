@@ -48,6 +48,8 @@
             this.picBossKoolAid = new System.Windows.Forms.PictureBox();
             this.picPlayer = new System.Windows.Forms.PictureBox();
             this.pickup_gold = new System.Windows.Forms.PictureBox();
+            this.playcontrolmenu = new System.Windows.Forms.PictureBox();
+
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall2)).BeginInit();
@@ -67,7 +69,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).BeginInit();
             this.SuspendLayout();
+           
             // 
             // lblInGameTime
             // 
@@ -316,7 +320,20 @@
             this.picWall11.Size = new System.Drawing.Size(164, 232);
             this.picWall11.TabIndex = 17;
             this.picWall11.TabStop = false;
-            // 
+            //
+            //playcontrolmenu
+            //
+            this.playcontrolmenu.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.menucontrol;
+            this.playcontrolmenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.playcontrolmenu.Location = new System.Drawing.Point(503, 268);
+            this.playcontrolmenu.Name = "playcontrolmenu";
+            this.playcontrolmenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.playcontrolmenu.Size = new System.Drawing.Size(549, 382);
+            this.playcontrolmenu.TabIndex = 24;
+            this.playcontrolmenu.TabStop = false;
+            this.playcontrolmenu.Click += new System.EventHandler(this.playcontrolmenu_Click_1);
+
+            //
             // FrmLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,6 +341,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1069, 666);
+            this.Controls.Add(this.playcontrolmenu);
             this.Controls.Add(this.goldDisplay);
             this.Controls.Add(this.pickup_gold);
             this.Controls.Add(this.pictureBox1);
@@ -372,6 +390,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,6 +421,7 @@
         private System.Windows.Forms.Label goldDisplay;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pickup_gold;
+        private System.Windows.Forms.PictureBox playcontrolmenu;
     }
 }
 
