@@ -102,11 +102,7 @@ namespace Fall2020_CSC403_Project
             Program.frame.WindowState = FormWindowState.Maximized;
             this.Focus();
         }
-        // toggle button does nothing as of now as there is no background music to toggle yet.
-        public void toggleBGMusic(object sender, EventArgs e)
-        {
-
-        }
+        
         private void BGMusicToggle_Click(object sender, EventArgs e)
         {
             FrmLevel.ToggleBackgroungMusic();
