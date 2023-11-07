@@ -270,14 +270,14 @@ namespace Fall2020_CSC403_Project
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
             if (175<coordinates.X && coordinates.X < 383 && 215 < coordinates.Y && coordinates.Y < 285)
-            //(123 < coordinates.X && coordinates.X < 291 && 180 < coordinates.Y && coordinates.Y < 226)
+            
             {
                 pause = false;
                 Menu();
 
             }
             else if (175 < coordinates.X && coordinates.X < 383 && 294 < coordinates.Y && coordinates.Y < 360)
-            //(119 < coordinates.X && coordinates.X < 290 && 242 < coordinates.Y && coordinates.Y < 285)
+           
             {
                 this.Close();
             }
