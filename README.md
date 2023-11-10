@@ -1,7 +1,15 @@
 ### Fall 2023 CSC403 Project
 A game role playing game brought to you by Khraft Heanz™© where you can fight battles and collect loot!
 
-## About
+## Game Features
+- Fight enemies!
+- Attack, Block and heal in combat
+- Collect gold
+- Clicky menus!
+- Navigate the level to reach the boss
+- Fight bosses to move on to the next level
+- Collect items to help you win
+
 
 ## Controls
 - Arrow Keys - Move your character around the screen.
@@ -22,6 +30,9 @@ Check out our project's wiki for more information about working on the game.
 
 ## notes:
 NG Commit 10/23/2023: had Jeremy review the code before upload. (I forgot to say that in the commit message so it is here.)
+
+## Credits
+Select icons made by the authors at Game-icons. Available on https://game-icons.net
 
 ## Contributers
 <a href="https://github.com/ajfdk/Fall2023_CSC403_Project/graphs/contributors">
