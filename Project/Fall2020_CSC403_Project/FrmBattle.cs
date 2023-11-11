@@ -13,6 +13,7 @@ namespace Fall2020_CSC403_Project
         public static FrmBattle instance = null;
         private Enemy enemy;
         private Player player;
+        private static int charbattle;
 
         private WaveOutEvent waveOut;
         private AudioFileReader audioFile;
@@ -56,6 +57,7 @@ namespace Fall2020_CSC403_Project
             picEnemy.Refresh();
             BackColor = enemy.BackgroundColor;
             picBossBattle.Visible = false;
+            getplayer();
 
             // Observer pattern as well as making the used of the heal
             enemy.AttackEvent += PlayerDamage;
@@ -65,6 +67,25 @@ namespace Fall2020_CSC403_Project
             // show health
             UpdateHealthBars();
         }
+
+        private void getplayer()
+        {
+            switch (charbattle)
+            {
+                case 1:
+                    picPlayer.BackgroundImage = Properties.Resources.cat;
+                    break;
+                case 2:
+                    picPlayer.BackgroundImage = Properties.Resources.hk;
+                    break;
+                case 0:
+                    picPlayer.BackgroundImage = Properties.Resources.player;
+
+                    break;
+               
+            }
+        }
+
 
         public void SetupForBossBattle()
         {
@@ -87,6 +108,18 @@ namespace Fall2020_CSC403_Project
 
         public static FrmBattle GetInstance(Enemy enemy)
         {
+            if (instance == null)
+            {
+                instance = new FrmBattle();
+                instance.enemy = enemy;
+                instance.Setup();
+            }
+            return instance;
+        }
+
+        public static FrmBattle GetInstance(Enemy enemy, int charactorchoice)
+        {
+            charbattle = charactorchoice;
             if (instance == null)
             {
                 instance = new FrmBattle();
