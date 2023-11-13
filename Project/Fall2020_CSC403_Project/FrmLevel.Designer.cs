@@ -57,7 +57,7 @@
             this.picBossKoolAid = new System.Windows.Forms.PictureBox();
             this.picPlayer = new System.Windows.Forms.PictureBox();
             this.playcontrolmenu = new System.Windows.Forms.PictureBox();
-            this.catPictureBox = new System.Windows.Forms.PictureBox();
+            this.orangeCatPictureBox = new System.Windows.Forms.PictureBox();
             this.snuggiePictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).BeginInit();
@@ -80,7 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.catPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orangeCatPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.snuggiePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -426,15 +426,15 @@
             this.playcontrolmenu.TabStop = false;
             this.playcontrolmenu.Click += new System.EventHandler(this.playcontrolmenu_Click_1);
             // 
-            // catPictureBox
+            // orangeCatPictureBox
             // 
-            this.catPictureBox.Image = global::Fall2020_CSC403_Project.Properties.Resources.cat;
-            this.catPictureBox.Location = new System.Drawing.Point(812, 74);
-            this.catPictureBox.Name = "catPictureBox";
-            this.catPictureBox.Size = new System.Drawing.Size(100, 100);
-            this.catPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.catPictureBox.TabIndex = 26;
-            this.catPictureBox.TabStop = false;
+            this.orangeCatPictureBox.Image = global::Fall2020_CSC403_Project.Properties.Resources.orangecat;
+            this.orangeCatPictureBox.Location = new System.Drawing.Point(812, 74);
+            this.orangeCatPictureBox.Name = "orangeCatPictureBox";
+            this.orangeCatPictureBox.Size = new System.Drawing.Size(100, 100);
+            this.orangeCatPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.orangeCatPictureBox.TabIndex = 26;
+            this.orangeCatPictureBox.TabStop = false;
             // 
             // snuggiePictureBox
             // 
@@ -455,7 +455,7 @@
             this.ClientSize = new System.Drawing.Size(1173, 722);
             this.Controls.Add(this.playcontrolmenu);
             this.Controls.Add(this.snuggiePictureBox);
-            this.Controls.Add(this.catPictureBox);
+            this.Controls.Add(this.orangeCatPictureBox);
             this.Controls.Add(this.dataGridViewInventory);
             this.Controls.Add(this.goldDisplay);
             this.Controls.Add(this.pickup_gold);
@@ -507,7 +507,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.catPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orangeCatPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.snuggiePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -541,7 +541,7 @@
         private System.Windows.Forms.PictureBox pickup_gold;
         private System.Windows.Forms.PictureBox playcontrolmenu;
         private System.Windows.Forms.DataGridView dataGridViewInventory;
-        private System.Windows.Forms.PictureBox catPictureBox;
+        private System.Windows.Forms.PictureBox orangeCatPictureBox;
         private System.Windows.Forms.PictureBox snuggiePictureBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemNameColumn;
         private System.Windows.Forms.DataGridViewImageColumn ItemImageColumn;

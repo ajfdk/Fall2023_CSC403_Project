@@ -55,7 +55,7 @@ namespace Fall2020_CSC403_Project
             enemyCheeto = new Enemy(CreatePosition(picEnemyCheeto), CreateCollider(picEnemyCheeto, PADDING));
 
             pickup_gold_001 = new Character(CreatePosition(pickup_gold), CreateCollider(pickup_gold, PADDING));
-            cat_pickup = new Character(CreatePosition(catPictureBox), CreateCollider(catPictureBox, PADDING));
+            cat_pickup = new Character(CreatePosition(orangeCatPictureBox), CreateCollider(orangeCatPictureBox, PADDING));
             snuggiePickup = new Character(CreatePosition(snuggiePictureBox), CreateCollider(snuggiePictureBox, PADDING));
 
             bossKoolaid.Img = picBossKoolAid.BackgroundImage;
@@ -162,9 +162,9 @@ namespace Fall2020_CSC403_Project
 
             }
             if (HitAChar(player, cat_pickup)){
-                Item cat = new Item("cat", "does cat like things", Resources.cat);
+                Item cat = new Item("cat", "does cat like things", Resources.orangecat);
                 player.inventory.AddItem(cat);
-                catPictureBox.Dispose();
+                orangeCatPictureBox.Dispose();
                 cat_pickup.Collider.RemoveMe();
                 Invalidate();
             }
