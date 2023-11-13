@@ -104,6 +104,7 @@ namespace Fall2020_CSC403_Project
             TimeSpan span = DateTime.Now - timeBegin;
             string time = span.ToString(@"hh\:mm\:ss");
             lblInGameTime.Text = "Time: " + time.ToString();
+
         }
 
         private void tmrPlayerMove_Tick(object sender, EventArgs e)
@@ -149,6 +150,74 @@ namespace Fall2020_CSC403_Project
             updateOnGoldDisplay();
         }
 
+        // Handles enemy Poison Packet's movement on screen.
+        private void enemyPoisonPacketMover()
+        {
+            // check collision with walls
+            if (HitAWall(enemyPoisonPacket))
+            {
+                enemyPoisonPacket.MoveBack();
+                enemyPoisonPacket.ResetMoveSpeed();
+
+                if (enemyPoisonPacket.Flip)
+                {
+                    enemyPoisonPacket.Flip = false;
+                }
+                else
+                {
+                    enemyPoisonPacket.Flip = true;
+                }
+            }
+            if (enemyPoisonPacket.Flip)
+            {
+                enemyPoisonPacket.GoUp();
+            }
+            else
+            {
+                enemyPoisonPacket.GoDown();
+            }
+            enemyPoisonPacket.Move();
+            picEnemyPoisonPacket.Location = new Point((int)enemyPoisonPacket.Position.x, (int)enemyPoisonPacket.Position.y);
+        }
+
+        // Handles enemy cheeto's movement on the screen.
+        private void enemyCheetoMover()
+        {
+            // check collision with walls
+            if (HitAWall(enemyCheeto))
+            {
+                enemyCheeto.MoveBack();
+                enemyCheeto.ResetMoveSpeed();
+
+                if (enemyCheeto.Flip)
+                {
+                    enemyCheeto.Flip = false;
+                }
+                else
+                {
+                    enemyCheeto.Flip = true;
+                }
+            }
+            if (enemyCheeto.Flip)
+            {
+                enemyCheeto.GoRight();
+            }
+            else
+            {
+                enemyCheeto.GoLeft();
+            }
+            enemyCheeto.Move();
+            picEnemyCheeto.Location = new Point((int)enemyCheeto.Position.x, (int)enemyCheeto.Position.y);
+        }
+
+        // Handles enemy movement while game is active.
+        private void tmrEnemyMove_Tick(object sender, EventArgs e)
+        {
+            // moves the normal enemies on the screen
+            enemyCheetoMover();
+            enemyPoisonPacketMover();
+        }
+
         private bool HitAWall(Character c)
         {
             bool hitAWall = false;
@@ -170,6 +239,20 @@ namespace Fall2020_CSC403_Project
 
         private void Fight(Enemy enemy)
         {
+            // check if boss koolaid is defeated
+            if (bossKoolaid.Health <= 0)
+            {
+
+                this.Controls.Clear();
+                
+
+                LevelTwo lvl2 = new LevelTwo();
+                lvl2.Show();
+                player.ResetMoveSpeed();
+                player.MoveBack();
+                return;
+            }
+
             player.ResetMoveSpeed();
             player.MoveBack();
             frmBattle = FrmBattle.GetInstance(enemy);
@@ -257,12 +340,6 @@ namespace Fall2020_CSC403_Project
 
         private void picEnemyPoisonPacket_Click(object sender, EventArgs e) {
 
-        }
-
-        // handles the button press to open the settings menu
-        private void settings_button_Click(object sender, EventArgs e)
-        {
-            // place opener for settings here.
         }
 
         private void playcontrolmenu_Click_1(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fall2020_CSC403_Project.code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Fall2020_CSC403_Project
 {
     public class LevelTwo : Form
     {
+        private Player player;
         private PictureBox Wall2;
         private PictureBox Wall3;
         private PictureBox Wall4;
@@ -27,6 +29,13 @@ namespace Fall2020_CSC403_Project
         private PictureBox Wall1;
         private PictureBox picPlayer;
         private PictureBox Wall5;
+
+
+        public LevelTwo()
+        {
+            player = Game.player;
+            InitializeComponent();
+        }
 
         // This Function is Auto-generated. Please only edit using the Visual Studio Designer.
         private void InitializeComponent()

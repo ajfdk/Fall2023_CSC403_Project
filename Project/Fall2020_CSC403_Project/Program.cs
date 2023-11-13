@@ -19,6 +19,7 @@ namespace Fall2020_CSC403_Project {
             Application.SetCompatibleTextRenderingDefault(false);
             frame = new FrmLevel();
             Application.Run(frame);
+            
         }
     }
 }

@@ -49,6 +49,7 @@
             this.picPlayer = new System.Windows.Forms.PictureBox();
             this.pickup_gold = new System.Windows.Forms.PictureBox();
             this.playcontrolmenu = new System.Windows.Forms.PictureBox();
+            this.tmrEnemyMove = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall2)).BeginInit();
@@ -352,6 +353,12 @@
             this.playcontrolmenu.TabStop = false;
             this.playcontrolmenu.Click += new System.EventHandler(this.playcontrolmenu_Click_1);
             // 
+            // tmrEnemyMove
+            // 
+            this.tmrEnemyMove.Enabled = true;
+            this.tmrEnemyMove.Interval = 10;
+            this.tmrEnemyMove.Tick += new System.EventHandler(this.tmrEnemyMove_Tick);
+            // 
             // FrmLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -440,6 +447,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pickup_gold;
         private System.Windows.Forms.PictureBox playcontrolmenu;
+        private System.Windows.Forms.Timer tmrEnemyMove;
     }
 }
 
