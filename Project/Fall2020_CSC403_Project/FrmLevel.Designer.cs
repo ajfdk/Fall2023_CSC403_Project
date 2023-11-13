@@ -26,14 +26,17 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLevel));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLevel));
             this.lblInGameTime = new System.Windows.Forms.Label();
             this.tmrUpdateInGameTime = new System.Windows.Forms.Timer(this.components);
             this.tmrPlayerMove = new System.Windows.Forms.Timer(this.components);
             this.goldDisplay = new System.Windows.Forms.Label();
             this.dataGridViewInventory = new System.Windows.Forms.DataGridView();
+            this.ItemNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ItemDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pickup_gold = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picWall11 = new System.Windows.Forms.PictureBox();
@@ -56,9 +59,6 @@
             this.playcontrolmenu = new System.Windows.Forms.PictureBox();
             this.catPictureBox = new System.Windows.Forms.PictureBox();
             this.snuggiePictureBox = new System.Windows.Forms.PictureBox();
-            this.ItemNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ItemDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -171,6 +171,38 @@
             this.dataGridViewInventory.TabIndex = 25;
             this.dataGridViewInventory.TabStop = false;
             this.dataGridViewInventory.Visible = false;
+            // 
+            // ItemNameColumn
+            // 
+            this.ItemNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            this.ItemNameColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ItemNameColumn.HeaderText = "Item Name";
+            this.ItemNameColumn.Name = "ItemNameColumn";
+            this.ItemNameColumn.ReadOnly = true;
+            this.ItemNameColumn.Width = 93;
+            // 
+            // ItemImageColumn
+            // 
+            this.ItemImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.NullValue = null;
+            this.ItemImageColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ItemImageColumn.HeaderText = "Item Image";
+            this.ItemImageColumn.Name = "ItemImageColumn";
+            this.ItemImageColumn.ReadOnly = true;
+            this.ItemImageColumn.Width = 75;
+            // 
+            // ItemDescription
+            // 
+            this.ItemDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ItemDescription.HeaderText = "Description";
+            this.ItemDescription.Name = "ItemDescription";
+            this.ItemDescription.ReadOnly = true;
+            this.ItemDescription.Width = 94;
             // 
             // pickup_gold
             // 
@@ -414,45 +446,13 @@
             this.snuggiePictureBox.TabIndex = 27;
             this.snuggiePictureBox.TabStop = false;
             // 
-            // ItemNameColumn
-            // 
-            this.ItemNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            this.ItemNameColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ItemNameColumn.HeaderText = "Item Name";
-            this.ItemNameColumn.Name = "ItemNameColumn";
-            this.ItemNameColumn.ReadOnly = true;
-            this.ItemNameColumn.Width = 93;
-            // 
-            // ItemImageColumn
-            // 
-            this.ItemImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.NullValue = null;
-            this.ItemImageColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ItemImageColumn.HeaderText = "Item Image";
-            this.ItemImageColumn.Name = "ItemImageColumn";
-            this.ItemImageColumn.ReadOnly = true;
-            this.ItemImageColumn.Width = 75;
-            // 
-            // ItemDescription
-            // 
-            this.ItemDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ItemDescription.HeaderText = "Description";
-            this.ItemDescription.Name = "ItemDescription";
-            this.ItemDescription.ReadOnly = true;
-            this.ItemDescription.Width = 94;
-            // 
             // FrmLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1069, 666);
+            this.ClientSize = new System.Drawing.Size(1173, 722);
             this.Controls.Add(this.playcontrolmenu);
             this.Controls.Add(this.snuggiePictureBox);
             this.Controls.Add(this.catPictureBox);
