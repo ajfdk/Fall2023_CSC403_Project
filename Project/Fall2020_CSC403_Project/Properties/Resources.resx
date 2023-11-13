@@ -158,10 +158,10 @@
   <data name="peanutgauntlet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\peanutgauntlet.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="snuggie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\snuggie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

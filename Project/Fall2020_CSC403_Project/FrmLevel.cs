@@ -18,6 +18,8 @@ namespace Fall2020_CSC403_Project
         private Enemy enemyCheeto;
         private Character[] walls;
         private Character pickup_gold_001;
+        private Character cat_pickup;
+        private Character snuggiePickup;
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
@@ -34,8 +36,6 @@ namespace Fall2020_CSC403_Project
 
 
         }
-
-
 
         private void dataGridViewInventory_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
             if (dataGridViewInventory.Columns[e.ColumnIndex].Name == "ItemImageColumn" && e.Value is Image) {
@@ -55,8 +55,8 @@ namespace Fall2020_CSC403_Project
             enemyCheeto = new Enemy(CreatePosition(picEnemyCheeto), CreateCollider(picEnemyCheeto, PADDING));
 
             pickup_gold_001 = new Character(CreatePosition(pickup_gold), CreateCollider(pickup_gold, PADDING));
-
-
+            cat_pickup = new Character(CreatePosition(catPictureBox), CreateCollider(catPictureBox, PADDING));
+            snuggiePickup = new Character(CreatePosition(snuggiePictureBox), CreateCollider(snuggiePictureBox, PADDING));
 
             bossKoolaid.Img = picBossKoolAid.BackgroundImage;
             enemyPoisonPacket.Img = picEnemyPoisonPacket.BackgroundImage;
@@ -83,6 +83,7 @@ namespace Fall2020_CSC403_Project
             Item pgItem = new Item("Peanut's Gauntlet", "lore team add description!", Resources.peanutgauntlet);
             player.inventory.AddItem(pgItem);
             dataGridViewInventory.Dock = DockStyle.Fill;
+            dataGridViewInventory.BringToFront();
             dataGridViewInventory.CellFormatting += dataGridViewInventory_CellFormatting;
         }
 
@@ -155,10 +156,24 @@ namespace Fall2020_CSC403_Project
                 pickup_gold.Dispose();
 
                 // need to destroy this item
-                this.pickup_gold_001.Collider.RemoveMe();
-                this.Invalidate();
+                pickup_gold_001.Collider.RemoveMe();
+                Invalidate();
                 //this.pickup_gold_001.Collider.MovePosition(0, 0);
 
+            }
+            if (HitAChar(player, cat_pickup)){
+                Item cat = new Item("cat", "does cat like things", Resources.cat);
+                player.inventory.AddItem(cat);
+                catPictureBox.Dispose();
+                cat_pickup.Collider.RemoveMe();
+                Invalidate();
+            }
+            if (HitAChar(player, snuggiePickup)) {
+                Item snuggie = new Item("Flaming hot cheetos Snuggie", "protects from cold icy environments.", Resources.snuggie);
+                player.inventory.AddItem(snuggie);
+                snuggiePictureBox.Dispose();
+                snuggiePickup.Collider.RemoveMe();
+                Invalidate();
             }
 
             // check collision with enemies
@@ -214,10 +229,10 @@ namespace Fall2020_CSC403_Project
         }
         private void pickUpGold(Player player) {
             player.updateGold(5);
-            this.goldDisplay.Text = player.gold.ToString();
+            goldDisplay.Text = player.gold.ToString();
         }
         public void updateOnGoldDisplay() {
-            this.goldDisplay.Text = player.gold.ToString();
+            goldDisplay.Text = player.gold.ToString();
         }
 
         private void FrmLevel_KeyDown(object sender, KeyEventArgs e)
@@ -265,7 +280,7 @@ namespace Fall2020_CSC403_Project
                 dataGridViewInventory.Rows.Clear();
                 List<Item> invItems = player.inventory.GetItems();
                 foreach (Item item in invItems) {
-                    dataGridViewInventory.Rows.Add(item.Name, item.ItemImage);
+                    dataGridViewInventory.Rows.Add(item.Name, item.ItemImage, item.Description);
                 }
                 dataGridViewInventory.Visible = true;
             }
@@ -330,7 +345,7 @@ namespace Fall2020_CSC403_Project
             else if (175 < coordinates.X && coordinates.X < 383 && 294 < coordinates.Y && coordinates.Y < 360)
            
             {
-                this.Close();
+                Close();
             }
         }
             
@@ -340,7 +355,7 @@ namespace Fall2020_CSC403_Project
         }
         private void CloseGame()
             {
-                this.Close();
+                Close();
             }
 
         private void pictureBox3_Click(object sender, EventArgs e)
