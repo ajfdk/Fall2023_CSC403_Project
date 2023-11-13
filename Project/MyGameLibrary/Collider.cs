@@ -21,5 +21,9 @@ namespace Fall2020_CSC403_Project.code {
         public bool Intersects(Collider c) {
             return rect.IntersectsWith(c.rect);
         }
+
+        public void RemoveMe() {
+            this.rect = Rectangle.Empty;
+        }
     }
 }
