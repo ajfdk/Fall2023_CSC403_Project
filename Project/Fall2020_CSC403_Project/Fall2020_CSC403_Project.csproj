@@ -185,6 +185,12 @@
     <None Include="Resources\snuggie.png" />
     <None Include="Resources\orangecat.png" />
     <None Include="Resources\peanutgauntlet.jpg" />
+    <Content Include="data\cat.png" />
+    <Content Include="data\catpix.png" />
+    <Content Include="data\hk.png" />
+    <Content Include="data\hkpix.png" />
+    <Content Include="data\playeric.png" />
+    <Content Include="data\skin.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\coins-pile.png" />

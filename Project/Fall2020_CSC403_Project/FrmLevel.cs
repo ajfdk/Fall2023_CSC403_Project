@@ -26,6 +26,7 @@ namespace Fall2020_CSC403_Project
         private static SoundPlayer backgroundMusic;
         private static bool IsMusicPlaying = true;
         private bool pause = true;
+        private int charactorchoice = 0;
 
         private bool invOpen = false;
 
@@ -216,8 +217,10 @@ namespace Fall2020_CSC403_Project
 
         private void Fight(Enemy enemy)
         {
+           
             player.ResetMoveSpeed();
             player.MoveBack();
+            frmBattle = FrmBattle.GetInstance(enemy, charactorchoice);
             frmBattle = FrmBattle.GetInstance(enemy);
             frmBattle.Show();
 
@@ -303,9 +306,40 @@ namespace Fall2020_CSC403_Project
 
                     }
                 }
+        private void hellokitty_Click(object sender, EventArgs e)
+        {
+            this.picPlayer.BackgroundImage = Properties.Resources.hk;
+            charactorchoice = 2;
 
-            
-        
+        }
+        private void kitten_Click(object sender, EventArgs e)
+        {
+            this.picPlayer.BackgroundImage = Properties.Resources.cat;
+            charactorchoice = 1;
+
+        }
+        private void playericon_Click(object sender, EventArgs e)
+        {
+
+            this.picPlayer.BackgroundImage = Properties.Resources.player;
+            charactorchoice = 0;
+        }
+        private void charactericon_Click(object sender, EventArgs e)
+        {
+            if (flowLayoutPanel1.Visible != true)
+            {
+                flowLayoutPanel1.Visible = true;
+                flowLayoutPanel1.Enabled = true;
+            }
+            else
+            {
+                flowLayoutPanel1.Visible = false;
+                flowLayoutPanel1.Enabled = false;
+            }
+        }
+
+
+
 
         private void lblInGameTime_Click(object sender, EventArgs e)
         {

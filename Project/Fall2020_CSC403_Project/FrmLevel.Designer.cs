@@ -61,6 +61,16 @@
             this.snuggiePictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).BeginInit();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.kittenicon = new System.Windows.Forms.PictureBox();
+            this.playericon = new System.Windows.Forms.PictureBox();
+            this.hellokittyicon = new System.Windows.Forms.PictureBox();
+            this.charactericon = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kittenicon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playericon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hellokittyicon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.charactericon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall2)).BeginInit();
@@ -446,14 +456,83 @@
             this.snuggiePictureBox.TabIndex = 27;
             this.snuggiePictureBox.TabStop = false;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Controls.Add(this.kittenicon);
+            this.flowLayoutPanel1.Controls.Add(this.playericon);
+            this.flowLayoutPanel1.Controls.Add(this.hellokittyicon);
+            this.flowLayoutPanel1.Enabled = false;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 80);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(109, 260);
+            this.flowLayoutPanel1.TabIndex = 19;
+            this.flowLayoutPanel1.Visible = false;
+            //
+            // kittenicon
+            // 
+            this.kittenicon.BackColor = System.Drawing.Color.Transparent;
+            this.kittenicon.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.catpix;
+            this.kittenicon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.kittenicon.Location = new System.Drawing.Point(3, 2);
+            this.kittenicon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.kittenicon.Name = "kittenicon";
+            this.kittenicon.Size = new System.Drawing.Size(97, 84);
+            this.kittenicon.TabIndex = 4;
+            this.kittenicon.TabStop = false;
+            this.kittenicon.Click += new System.EventHandler(this.kitten_Click);
+            // 
+            // playericon
+            // 
+            this.playericon.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.playeric;
+            this.playericon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.playericon.Location = new System.Drawing.Point(3, 90);
+            this.playericon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.playericon.Name = "playericon";
+            this.playericon.Size = new System.Drawing.Size(97, 81);
+            this.playericon.TabIndex = 5;
+            this.playericon.TabStop = false;
+            this.playericon.Click += new System.EventHandler(this.playericon_Click);
+            // 
+            // hellokittyicon
+            // 
+            this.hellokittyicon.BackColor = System.Drawing.Color.Transparent;
+            this.hellokittyicon.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.hkpix;
+            this.hellokittyicon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hellokittyicon.Dock = System.Windows.Forms.DockStyle.Top;
+            this.hellokittyicon.Location = new System.Drawing.Point(3, 175);
+            this.hellokittyicon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.hellokittyicon.Name = "hellokittyicon";
+            this.hellokittyicon.Size = new System.Drawing.Size(97, 65);
+            this.hellokittyicon.TabIndex = 0;
+            this.hellokittyicon.TabStop = false;
+            this.hellokittyicon.Click += new System.EventHandler(this.hellokitty_Click);
+            //
+            //charactericon
+            //
+            this.charactericon.BackColor = System.Drawing.Color.Transparent;
+            this.charactericon.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.skin;
+            this.charactericon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.charactericon.Location = new System.Drawing.Point(3, 1);
+            this.charactericon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.charactericon.Name = "charactericon";
+            this.charactericon.Size = new System.Drawing.Size(109, 82);
+            this.charactericon.TabIndex = 18;
+            this.charactericon.TabStop = false;
+            this.charactericon.Click += new System.EventHandler(this.charactericon_Click);
+            //
             // FrmLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1173, 722);
+            this.ClientSize = new System.Drawing.Size(1069, 666);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.playcontrolmenu);
+            this.Controls.Add(this.charactericon);
             this.Controls.Add(this.snuggiePictureBox);
             this.Controls.Add(this.orangeCatPictureBox);
             this.Controls.Add(this.dataGridViewInventory);
@@ -486,6 +565,7 @@
             this.Load += new System.EventHandler(this.FrmLevel_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmLevel_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmLevel_KeyUp);
+            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -509,6 +589,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orangeCatPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.snuggiePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kittenicon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playericon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hellokittyicon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.charactericon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -546,6 +630,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemNameColumn;
         private System.Windows.Forms.DataGridViewImageColumn ItemImageColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemDescription;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.PictureBox kittenicon;
+        private System.Windows.Forms.PictureBox playericon;
+        private System.Windows.Forms.PictureBox hellokittyicon;
+        private System.Windows.Forms.PictureBox charactericon;
     }
 }
 
