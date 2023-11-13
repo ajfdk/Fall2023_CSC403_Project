@@ -268,7 +268,8 @@ namespace Fall2020_CSC403_Project
                     CharacterScreen character = new CharacterScreen();
                     character.Show();
                     break;
-                case Keys.M:
+                // pause screen when presses P                  
+                case Keys.P:
                     pause = true;
                     Menu();
                     break;
