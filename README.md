@@ -1,5 +1,5 @@
 ### Fall 2023 CSC403 Project
-A game role playing game brought to you by Khraft Heanz™© where you can fight battles and collect loot!
+A role playing game brought to you by Khraft Heanz™© where you can fight battles and collect loot!
 
 ## Game Features
 - Fight enemies!
