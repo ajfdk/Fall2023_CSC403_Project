@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fall2020_CSC403_Project;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Fall2020_CSC403_Project.code {
     public class BattleCharacter : Character {
         public int Health { get; private set; }
         public int MaxHealth { get; private set; }
-        private float strength;
+        public float strength;
 
         public event Action<int> AttackEvent;
 
@@ -38,6 +39,11 @@ namespace Fall2020_CSC403_Project.code {
         public void SetHealth(int amount)
         {
             Health = amount;
+        }
+
+        public void setStrength(int amount)
+        {
+            strength = amount;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Fall2020_CSC403_Project
         private Label SettingsBackdrop;
         private Button NormalSize;
         private Button Maximize;
+        private Button Difficulty;
         private Button BGMusicToggle;
 
         public Settings()
@@ -26,6 +27,7 @@ namespace Fall2020_CSC403_Project
             this.NormalSize = new System.Windows.Forms.Button();
             this.Maximize = new System.Windows.Forms.Button();
             this.BGMusicToggle = new System.Windows.Forms.Button();
+            this.Difficulty = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SettingsBackdrop
@@ -75,10 +77,23 @@ namespace Fall2020_CSC403_Project
             this.BGMusicToggle.UseVisualStyleBackColor = true;
             this.BGMusicToggle.Click += new System.EventHandler(this.BGMusicToggle_Click);
             // 
+            // Difficulty
+            // 
+            this.Difficulty.AutoSize = true;
+            this.Difficulty.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.Difficulty.Location = new System.Drawing.Point(135, 172);
+            this.Difficulty.Name = "Difficulty";
+            this.Difficulty.Size = new System.Drawing.Size(105, 35);
+            this.Difficulty.TabIndex = 5;
+            this.Difficulty.Text = "Difficulty";
+            this.Difficulty.UseVisualStyleBackColor = true;
+            this.Difficulty.Click += new System.EventHandler(this.Difficulty_Click);
+            // 
             // Settings
             // 
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(378, 244);
+            this.ClientSize = new System.Drawing.Size(384, 261);
+            this.Controls.Add(this.Difficulty);
             this.Controls.Add(this.BGMusicToggle);
             this.Controls.Add(this.Maximize);
             this.Controls.Add(this.NormalSize);
@@ -112,5 +127,10 @@ namespace Fall2020_CSC403_Project
             FrmLevel.ToggleBackgroungMusic();
         }
 
+        private void Difficulty_Click(object sender, EventArgs e)
+        {
+            Difficulty dif = new Difficulty();
+            dif.Show();
+        }
     }
 }

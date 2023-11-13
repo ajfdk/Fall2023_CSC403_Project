@@ -13,12 +13,15 @@ namespace Fall2020_CSC403_Project
         public static FrmBattle instance = null;
         private Enemy enemy;
         private Player player;
+        private static int charbattle;
 
         private WaveOutEvent waveOut;
         private AudioFileReader audioFile;
         
         int uses = new int();
         int used = new int();
+        bool Identified = new bool();
+        bool Deflected = new bool();
 
         private FrmBattle()
         {
@@ -56,6 +59,11 @@ namespace Fall2020_CSC403_Project
             picEnemy.Refresh();
             BackColor = enemy.BackgroundColor;
             picBossBattle.Visible = false;
+            lblEnemyHealthFull.Visible = false;
+            lblAction.Visible = false;
+            Identified = false;
+            Deflected = false;
+            getplayer();
 
             // Observer pattern as well as making the used of the heal
             enemy.AttackEvent += PlayerDamage;
@@ -65,6 +73,25 @@ namespace Fall2020_CSC403_Project
             // show health
             UpdateHealthBars();
         }
+
+        private void getplayer()
+        {
+            switch (charbattle)
+            {
+                case 1:
+                    picPlayer.BackgroundImage = Properties.Resources.cat;
+                    break;
+                case 2:
+                    picPlayer.BackgroundImage = Properties.Resources.hk;
+                    break;
+                case 0:
+                    picPlayer.BackgroundImage = Properties.Resources.player;
+
+                    break;
+               
+            }
+        }
+
 
         public void SetupForBossBattle()
         {
@@ -96,6 +123,18 @@ namespace Fall2020_CSC403_Project
             return instance;
         }
 
+        public static FrmBattle GetInstance(Enemy enemy, int charactorchoice)
+        {
+            charbattle = charactorchoice;
+            if (instance == null)
+            {
+                instance = new FrmBattle();
+                instance.enemy = enemy;
+                instance.Setup();
+            }
+            return instance;
+        }
+
         private void UpdateHealthBars()
         {
             float playerHealthPer = player.Health / (float)player.MaxHealth;
@@ -107,18 +146,23 @@ namespace Fall2020_CSC403_Project
 
             lblPlayerHealthFull.Text = player.Health.ToString();
             lblEnemyHealthFull.Text = enemy.Health.ToString();
+
         }
 
 
         //This is a button that makes the player and enemy both attack for random amounts of damage
         private void btnAttack_Click(object sender, EventArgs e) {
             var plyrChance = new Random();
-            player.OnAttack(-(plyrChance.Next(2, 10)));
+            var lblHold = (plyrChance.Next(2, 10));
+            player.OnAttack(-lblHold);
+            this.lblAction.Text = "Enemy Hit For " + lblHold;
 
             if (enemy.Health > 0) {
 
                 var nmyChance = new Random();
-                enemy.OnAttack(-(nmyChance.Next(3, 9)));
+                var lbl2Hold = (nmyChance.Next(3, 9));
+                enemy.OnAttack(-lbl2Hold);
+                this.lblSelf.Text = "You Were Hit For " + lbl2Hold;
             }
 
             UpdateHealthBars();
@@ -131,8 +175,8 @@ namespace Fall2020_CSC403_Project
 
 
         //This is a button to heal for a random amount but can only be used a certain set number of times
-        //It also stops the health at 20 if the heal would overflow
-        //Addeed extra functionality that shows the number of heals readily available
+        //It also stops the health at 20 if the heal would overflow, has a use count, and
+        //Label descriptors are used so show the amounts healed for
         private void btnHeal_Click(object sender, EventArgs e)
         {
             if (player.Health > 0 && enemy.Health > 0)
@@ -141,11 +185,14 @@ namespace Fall2020_CSC403_Project
                 {
                     uses++;
                     var plyrChance = new Random();
-                    player.AlterHealth(plyrChance.Next(5, 7));
+                    var lblHold = (plyrChance.Next(5, 7));
+                    player.AlterHealth(lblHold);
+                    this.lblSelf.Text = "You Healed For " + lblHold;
 
                     if (enemy.Health != 20)
                     {
                         enemy.AlterHealth(1);
+                        this.lblAction.Text = "Enemy Restored Health";
 
                         if (enemy.Health > 20)
                         {
@@ -166,7 +213,7 @@ namespace Fall2020_CSC403_Project
         }
 
         //This is an infinite use button that has a chance to deflect the enemies attack back at them for damage
-        //Added extra functionality to show if succesful or not
+        //Descriptor labels are used to show if the random chance was successful or not
         private void btnDeflect_Click(object sender, EventArgs e)
         {
             var chance = new Random();
@@ -175,15 +222,20 @@ namespace Fall2020_CSC403_Project
             if (enemy.Health > 0 && percent > 1)
             {
                 var nmyChance = new Random();
-                enemy.OnAttack(-(nmyChance.Next(2, 6)));
-                this.btnDeflect.Text = "Failed";
+                var lbl2Hold = nmyChance.Next(2, 6);
+                enemy.OnAttack(-lbl2Hold);
+                this.lblSelf.Text = "Failed Deflect, Hit For " + lbl2Hold;
+                this.lblAction.Text = "Successful Hit";
             }
 
             if (enemy.Health > 0 && percent <= 1)
             {
+                Deflected = true;
                 var plyrChance = new Random();
-                player.OnAttack(-(plyrChance.Next(5, 8)));
-                this.btnDeflect.Text = "Success";
+                var lblHold = plyrChance.Next(5, 8);
+                player.OnAttack(-lblHold);
+                this.lblSelf.Text = "Successful Deflect";
+                this.lblAction.Text = "Attack Deflected For " + lblHold;
             }
 
             UpdateHealthBars();
@@ -195,7 +247,30 @@ namespace Fall2020_CSC403_Project
             }
         }
 
-        private void EnemyDamage(int amount)
+        //This is a single use button to identify the enemies stats (health, strength, battle descriptors),
+        //
+        private void btnIdentify_Click(object sender, EventArgs e)
+        {
+            if (Identified == false)
+            {
+                if (player.Health == 20 && Deflected == false)
+                {
+                    var nmyChance = new Random();
+                    var lbl2Hold = nmyChance.Next(2, 4);
+                    enemy.OnAttack(-lbl2Hold);
+                    this.lblSelf.Text = "Ambush Attacked, Hit For " + lbl2Hold;
+                    UpdateHealthBars();
+                }
+                lblEnemyHealthFull.Visible = true;
+                lblAction.Visible = true;
+                this.lblStr.Text = "Strength: " + player.getStrength();
+                this.lblAction.Text = "Identified";
+                Identified = true;
+            }
+
+        }
+
+            private void EnemyDamage(int amount)
         {
             enemy.AlterHealth(amount);
         }
@@ -215,7 +290,5 @@ namespace Fall2020_CSC403_Project
         {
 
         }
-
-
     }
 }
