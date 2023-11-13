@@ -12,9 +12,10 @@ A game role playing game brought to you by Khraft Heanz™© where you can fight
 
 
 ## Controls
-- Arrow Keys - Move your character around the screen.
-- ESC - Open the menu.
-- Right mouse click to make your choice during combat.
+- `Arrow Keys` - Move your character around the screen.
+- `ESC` - Open the menu.
+- `Right mouse click` to make your choice during combat.
+- `I` - holding i on the keyboard shows the inventory screen.
 
 ## FAQ
 1. How do I win the game? 
