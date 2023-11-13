@@ -23,6 +23,8 @@ namespace Fall2020_CSC403_Project
         private static SoundPlayer backgroundMusic;
         private static bool IsMusicPlaying = true;
         private bool pause = true;
+        private bool bossAlive = true;
+        private bool playerAlive = true;
 
         public FrmLevel()
         {
@@ -156,8 +158,8 @@ namespace Fall2020_CSC403_Project
             // check collision with walls
             if (HitAWall(enemyPoisonPacket))
             {
-                enemyPoisonPacket.MoveBack();
                 enemyPoisonPacket.ResetMoveSpeed();
+                enemyPoisonPacket.MoveBack();
 
                 if (enemyPoisonPacket.Flip)
                 {
@@ -186,8 +188,8 @@ namespace Fall2020_CSC403_Project
             // check collision with walls
             if (HitAWall(enemyCheeto))
             {
-                enemyCheeto.MoveBack();
                 enemyCheeto.ResetMoveSpeed();
+                enemyCheeto.MoveBack();
 
                 if (enemyCheeto.Flip)
                 {
@@ -210,9 +212,43 @@ namespace Fall2020_CSC403_Project
             picEnemyCheeto.Location = new Point((int)enemyCheeto.Position.x, (int)enemyCheeto.Position.y);
         }
 
-        // Handles enemy movement while game is active.
+        // Handles enemy movement while game is active as well as keep track of boss
+        // and player health. If boss is defeated, player wins. If player defeated,
+        // player loses.
         private void tmrEnemyMove_Tick(object sender, EventArgs e)
         {
+
+            // check if boss koolaid is defeated for the first time
+            if ((bossKoolaid.Health <= 0) && bossAlive)
+            {
+                player.ResetMoveSpeed();
+                player.MoveBack();
+                bossAlive = false;
+                
+                foreach (Control control in this.Controls)
+                {
+                    control.Hide();
+                }
+
+                this.tmrPlayerMove.Enabled = false;
+                this.VictoryImage.Visible = true;
+            }
+
+            if ((player.Health <= 0) && playerAlive)
+            {
+                player.ResetMoveSpeed();
+                player.MoveBack();
+                playerAlive = false;
+
+                foreach (Control control in this.Controls)
+                {
+                    control.Hide();
+                }
+
+                this.tmrPlayerMove.Enabled = false;
+                this.DefeatImage.Visible = true;
+            }
+
             // moves the normal enemies on the screen
             enemyCheetoMover();
             enemyPoisonPacketMover();
@@ -239,19 +275,6 @@ namespace Fall2020_CSC403_Project
 
         private void Fight(Enemy enemy)
         {
-            // check if boss koolaid is defeated
-            if (bossKoolaid.Health <= 0)
-            {
-
-                this.Controls.Clear();
-                
-
-                LevelTwo lvl2 = new LevelTwo();
-                lvl2.Show();
-                player.ResetMoveSpeed();
-                player.MoveBack();
-                return;
-            }
 
             player.ResetMoveSpeed();
             player.MoveBack();
@@ -306,23 +329,20 @@ namespace Fall2020_CSC403_Project
                     break;
             }
         }
-                private void Menu()
-                {
-                    if (playcontrolmenu.Visible != true)
-                    {
-                        playcontrolmenu.Enabled = true;
-                        playcontrolmenu.Visible = true;
-                    }
-                    else
-                    {
-                        playcontrolmenu.Enabled = false;
-                        playcontrolmenu.Visible = false;
+        private void Menu()
+        {
+            if (playcontrolmenu.Visible != true)
+            {
+                playcontrolmenu.Enabled = true;
+                playcontrolmenu.Visible = true;
+            }
+            else
+            {
+                playcontrolmenu.Enabled = false;
+                playcontrolmenu.Visible = false;
 
-                    }
-                }
-
-            
-        
+            }
+        }
 
         private void lblInGameTime_Click(object sender, EventArgs e)
         {
@@ -365,13 +385,14 @@ namespace Fall2020_CSC403_Project
 
         }
         private void CloseGame()
-            {
-                this.Close();
-            }
+        {
+            this.Close();
+        }
 
         private void pictureBox3_Click(object sender, EventArgs e)
-            {
-                CloseGame();
-            }
+        {
+            CloseGame();
+        }
+
         }
     }

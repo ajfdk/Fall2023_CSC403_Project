@@ -29,6 +29,11 @@
             this.tmrUpdateInGameTime = new System.Windows.Forms.Timer(this.components);
             this.tmrPlayerMove = new System.Windows.Forms.Timer(this.components);
             this.goldDisplay = new System.Windows.Forms.Label();
+            this.tmrEnemyMove = new System.Windows.Forms.Timer(this.components);
+            this.DefeatImage = new System.Windows.Forms.PictureBox();
+            this.VictoryImage = new System.Windows.Forms.PictureBox();
+            this.playcontrolmenu = new System.Windows.Forms.PictureBox();
+            this.pickup_gold = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picWall11 = new System.Windows.Forms.PictureBox();
             this.picWall2 = new System.Windows.Forms.PictureBox();
@@ -47,9 +52,10 @@
             this.picWall3 = new System.Windows.Forms.PictureBox();
             this.picBossKoolAid = new System.Windows.Forms.PictureBox();
             this.picPlayer = new System.Windows.Forms.PictureBox();
-            this.pickup_gold = new System.Windows.Forms.PictureBox();
-            this.playcontrolmenu = new System.Windows.Forms.PictureBox();
-            this.tmrEnemyMove = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.DefeatImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VictoryImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall2)).BeginInit();
@@ -68,8 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWall3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).BeginInit();
             this.SuspendLayout();
             // 
             // lblInGameTime
@@ -111,6 +115,61 @@
             this.goldDisplay.Text = global::Fall2020_CSC403_Project.Properties.Settings.Default.Gold;
             this.goldDisplay.UseCompatibleTextRendering = true;
             this.goldDisplay.Click += new System.EventHandler(this.Label1_Click);
+            // 
+            // tmrEnemyMove
+            // 
+            this.tmrEnemyMove.Enabled = true;
+            this.tmrEnemyMove.Interval = 10;
+            this.tmrEnemyMove.Tick += new System.EventHandler(this.tmrEnemyMove_Tick);
+            // 
+            // DefeatImage
+            // 
+            this.DefeatImage.Enabled = false;
+            this.DefeatImage.Image = global::Fall2020_CSC403_Project.Properties.Resources.DefeatScreenFinal;
+            this.DefeatImage.InitialImage = null;
+            this.DefeatImage.Location = new System.Drawing.Point(536, 206);
+            this.DefeatImage.Name = "DefeatImage";
+            this.DefeatImage.Size = new System.Drawing.Size(807, 520);
+            this.DefeatImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DefeatImage.TabIndex = 26;
+            this.DefeatImage.TabStop = false;
+            this.DefeatImage.Visible = false;
+            // 
+            // VictoryImage
+            // 
+            this.VictoryImage.Image = global::Fall2020_CSC403_Project.Properties.Resources.VictoryScreenFinal;
+            this.VictoryImage.InitialImage = null;
+            this.VictoryImage.Location = new System.Drawing.Point(536, 206);
+            this.VictoryImage.Name = "VictoryImage";
+            this.VictoryImage.Size = new System.Drawing.Size(807, 520);
+            this.VictoryImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.VictoryImage.TabIndex = 25;
+            this.VictoryImage.TabStop = false;
+            this.VictoryImage.Visible = false;
+            // 
+            // playcontrolmenu
+            // 
+            this.playcontrolmenu.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.menucontrol;
+            this.playcontrolmenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.playcontrolmenu.Location = new System.Drawing.Point(754, 412);
+            this.playcontrolmenu.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.playcontrolmenu.Name = "playcontrolmenu";
+            this.playcontrolmenu.Size = new System.Drawing.Size(824, 588);
+            this.playcontrolmenu.TabIndex = 24;
+            this.playcontrolmenu.TabStop = false;
+            this.playcontrolmenu.Click += new System.EventHandler(this.playcontrolmenu_Click_1);
+            // 
+            // pickup_gold
+            // 
+            this.pickup_gold.Image = global::Fall2020_CSC403_Project.Properties.Resources.coins;
+            this.pickup_gold.Location = new System.Drawing.Point(864, 191);
+            this.pickup_gold.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pickup_gold.Name = "pickup_gold";
+            this.pickup_gold.Size = new System.Drawing.Size(76, 78);
+            this.pickup_gold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pickup_gold.TabIndex = 20;
+            this.pickup_gold.TabStop = false;
+            this.pickup_gold.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -329,36 +388,6 @@
             this.picPlayer.TabIndex = 0;
             this.picPlayer.TabStop = false;
             // 
-            // pickup_gold
-            // 
-            this.pickup_gold.Image = global::Fall2020_CSC403_Project.Properties.Resources.coins;
-            this.pickup_gold.Location = new System.Drawing.Point(864, 191);
-            this.pickup_gold.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pickup_gold.Name = "pickup_gold";
-            this.pickup_gold.Size = new System.Drawing.Size(76, 78);
-            this.pickup_gold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pickup_gold.TabIndex = 20;
-            this.pickup_gold.TabStop = false;
-            this.pickup_gold.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // playcontrolmenu
-            // 
-            this.playcontrolmenu.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.menucontrol;
-            this.playcontrolmenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.playcontrolmenu.Location = new System.Drawing.Point(754, 412);
-            this.playcontrolmenu.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.playcontrolmenu.Name = "playcontrolmenu";
-            this.playcontrolmenu.Size = new System.Drawing.Size(824, 588);
-            this.playcontrolmenu.TabIndex = 24;
-            this.playcontrolmenu.TabStop = false;
-            this.playcontrolmenu.Click += new System.EventHandler(this.playcontrolmenu_Click_1);
-            // 
-            // tmrEnemyMove
-            // 
-            this.tmrEnemyMove.Enabled = true;
-            this.tmrEnemyMove.Interval = 10;
-            this.tmrEnemyMove.Tick += new System.EventHandler(this.tmrEnemyMove_Tick);
-            // 
             // FrmLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -366,6 +395,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1754, 1042);
+            this.Controls.Add(this.VictoryImage);
+            this.Controls.Add(this.DefeatImage);
             this.Controls.Add(this.playcontrolmenu);
             this.Controls.Add(this.goldDisplay);
             this.Controls.Add(this.pickup_gold);
@@ -396,6 +427,10 @@
             this.Load += new System.EventHandler(this.FrmLevel_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmLevel_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmLevel_KeyUp);
+            ((System.ComponentModel.ISupportInitialize)(this.DefeatImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VictoryImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall2)).EndInit();
@@ -414,8 +449,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWall3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pickup_gold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playcontrolmenu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -448,6 +481,8 @@
         private System.Windows.Forms.PictureBox pickup_gold;
         private System.Windows.Forms.PictureBox playcontrolmenu;
         private System.Windows.Forms.Timer tmrEnemyMove;
+        private System.Windows.Forms.PictureBox VictoryImage;
+        private System.Windows.Forms.PictureBox DefeatImage;
     }
 }
 
