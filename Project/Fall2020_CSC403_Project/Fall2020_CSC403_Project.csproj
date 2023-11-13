@@ -167,6 +167,7 @@
     <Content Include="data\backgroundMusicPlayer.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\peanutgauntlet.jpg" />
     <None Include="Resources\cat.png" />
     <None Include="Resources\snuggie.png" />
   </ItemGroup>

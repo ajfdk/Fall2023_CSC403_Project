@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Media;
 using System.Drawing.Text;
+using Fall2020_CSC403_Project.Properties;
+using System.Collections.Generic;
 
 namespace Fall2020_CSC403_Project
 {
@@ -15,7 +17,6 @@ namespace Fall2020_CSC403_Project
         private Enemy bossKoolaid;
         private Enemy enemyCheeto;
         private Character[] walls;
-
         private Character pickup_gold_001;
 
         private DateTime timeBegin;
@@ -24,11 +25,35 @@ namespace Fall2020_CSC403_Project
         private static bool IsMusicPlaying = true;
         private bool pause = true;
 
+        private bool invOpen = false;
+
+        
+
         public FrmLevel()
         {
             InitializeComponent();
             backgroundMusic = new SoundPlayer("data/backgroundMusicPlayer.wav");
+
+
         }
+
+        private void ShowInventory() {
+            dataGridViewInventory.Visible = true;
+            dataGridViewInventory.Rows.Clear();
+            List<Item> im = player.inventory.GetItems();
+            foreach (Item item in im) {
+                dataGridViewInventory.Rows.Add(item.Name, item.ItemImage);
+                //dataGridViewInventory.Rows.Add(item.ItemImage);
+
+            }
+        }
+
+        private void dataGridViewInventory_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+            if (dataGridViewInventory.Columns[e.ColumnIndex].Name == "ItemImageColumn" && e.Value is Image) {
+                e.Value = e.Value;
+            }
+        }
+
 
         private void FrmLevel_Load(object sender, EventArgs e)
         {
@@ -41,6 +66,8 @@ namespace Fall2020_CSC403_Project
             enemyCheeto = new Enemy(CreatePosition(picEnemyCheeto), CreateCollider(picEnemyCheeto, PADDING));
 
             pickup_gold_001 = new Character(CreatePosition(pickup_gold), CreateCollider(pickup_gold, PADDING));
+
+
 
             bossKoolaid.Img = picBossKoolAid.BackgroundImage;
             enemyPoisonPacket.Img = picEnemyPoisonPacket.BackgroundImage;
@@ -62,6 +89,28 @@ namespace Fall2020_CSC403_Project
 
             Game.player = player;
             timeBegin = DateTime.Now;
+
+            // testing inv
+            Item pgItem = new Item("Peanut's Gauntlet", "lore team add description!", Resources.peanutgauntlet);
+            player.inventory.AddItem(pgItem);
+
+            //dataGridViewInventory = new DataGridView();
+            dataGridViewInventory.Dock = DockStyle.Fill;
+            //dataGridViewInventory.BringToFront();
+            //Controls.Add(dataGridViewInventory);
+
+            //DataGridViewImageColumn nameColumn = new DataGridViewImageColumn {
+            //    Name = "ItemNameColumn",
+            //    HeaderText = "Item Name"
+            //};
+            //DataGridViewImageColumn imageColumn = new DataGridViewImageColumn {
+            //    Name = "ItemImageColumn",
+            //    HeaderText = "Item Image"
+            //};
+            //dataGridViewInventory.Columns.Add(nameColumn);
+            //dataGridViewInventory.Columns.Add(imageColumn);
+            dataGridViewInventory.CellFormatting += dataGridViewInventory_CellFormatting;
+            ShowInventory();
         }
 
         public static void ToggleBackgroungMusic()
@@ -96,6 +145,10 @@ namespace Fall2020_CSC403_Project
 
         private void FrmLevel_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.I) {
+                invOpen = false;
+            }
+
             player.ResetMoveSpeed();
         }
 
@@ -127,7 +180,10 @@ namespace Fall2020_CSC403_Project
                 pickup_gold.Dispose();
 
                 // need to destroy this item
-                this.pickup_gold_001.Collider.MovePosition(0, 0);
+                this.pickup_gold_001.Collider.RemoveMe();
+                this.Invalidate();
+                //this.pickup_gold_001.Collider.MovePosition(0, 0);
+
             }
 
             // check collision with enemies
@@ -209,6 +265,11 @@ namespace Fall2020_CSC403_Project
                     player.GoDown();
                     break;
 
+                case Keys.I:
+                    invOpen = true;
+                    ShowInventoryNow();
+                    break;
+
                 // open the character screen when pressing escape key on keyboard.
                 case Keys.Escape:
                     CharacterScreen character = new CharacterScreen();
@@ -223,7 +284,22 @@ namespace Fall2020_CSC403_Project
                     break;
             }
         }
-                private void Menu()
+
+        private void ShowInventoryNow() {
+            if (invOpen) {
+                dataGridViewInventory.Rows.Clear();
+                List<Item> invItems = player.inventory.GetItems();
+                foreach (Item item in invItems) {
+                    dataGridViewInventory.Rows.Add(item.Name, item.ItemImage);
+                }
+                dataGridViewInventory.Visible = true;
+            }
+            else {
+                dataGridViewInventory.Visible = false;
+            }
+        }
+
+        private void Menu()
                 {
                     if (playcontrolmenu.Visible != true)
                     {
