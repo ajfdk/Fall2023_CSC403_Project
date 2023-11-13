@@ -167,6 +167,8 @@
     <Content Include="data\backgroundMusicPlayer.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\cat.png" />
+    <None Include="Resources\snuggie.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\coins-pile.png" />
@@ -184,7 +186,7 @@
     <None Include="Resources\settings_icon_resize.png" />
   </ItemGroup>
   <ItemGroup>
-  <None Include="data\menucontrol.png" />
+    <None Include="data\menucontrol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

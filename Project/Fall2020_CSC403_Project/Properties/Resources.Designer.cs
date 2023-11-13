@@ -59,18 +59,6 @@ namespace Fall2020_CSC403_Project.Properties {
                 resourceCulture = value;
             }
         }
-
-        ///<summary>
-        ///Looks up a Localized resource of type Sytem.Drawing.Bitmap
-        ///</summary>
-        internal static System.Drawing.Bitmap menucontrol
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("menucontrol", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -78,6 +66,16 @@ namespace Fall2020_CSC403_Project.Properties {
         internal static System.Drawing.Bitmap battle_screen {
             get {
                 object obj = ResourceManager.GetObject("battle_screen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cat {
+            get {
+                object obj = ResourceManager.GetObject("cat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -144,6 +142,16 @@ namespace Fall2020_CSC403_Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menucontrol {
+            get {
+                object obj = ResourceManager.GetObject("menucontrol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap player {
             get {
                 object obj = ResourceManager.GetObject("player", resourceCulture);
@@ -167,6 +175,16 @@ namespace Fall2020_CSC403_Project.Properties {
         internal static System.Drawing.Bitmap settings_icon_resize {
             get {
                 object obj = ResourceManager.GetObject("settings_icon_resize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap snuggie {
+            get {
+                object obj = ResourceManager.GetObject("snuggie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
