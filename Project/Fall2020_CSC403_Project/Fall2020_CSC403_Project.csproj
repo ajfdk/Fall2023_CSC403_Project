@@ -183,7 +183,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\snuggie.png" />
-    <None Include="Resources\cat.png" />
+    <None Include="Resources\orangecat.png" />
     <None Include="Resources\peanutgauntlet.jpg" />
   </ItemGroup>
   <ItemGroup>
