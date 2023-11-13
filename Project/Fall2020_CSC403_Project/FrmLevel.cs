@@ -27,8 +27,6 @@ namespace Fall2020_CSC403_Project
 
         private bool invOpen = false;
 
-        
-
         public FrmLevel()
         {
             InitializeComponent();
@@ -37,16 +35,7 @@ namespace Fall2020_CSC403_Project
 
         }
 
-        private void ShowInventory() {
-            dataGridViewInventory.Visible = true;
-            dataGridViewInventory.Rows.Clear();
-            List<Item> im = player.inventory.GetItems();
-            foreach (Item item in im) {
-                dataGridViewInventory.Rows.Add(item.Name, item.ItemImage);
-                //dataGridViewInventory.Rows.Add(item.ItemImage);
 
-            }
-        }
 
         private void dataGridViewInventory_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
             if (dataGridViewInventory.Columns[e.ColumnIndex].Name == "ItemImageColumn" && e.Value is Image) {
@@ -90,27 +79,11 @@ namespace Fall2020_CSC403_Project
             Game.player = player;
             timeBegin = DateTime.Now;
 
-            // testing inv
+            // Player starts with an item
             Item pgItem = new Item("Peanut's Gauntlet", "lore team add description!", Resources.peanutgauntlet);
             player.inventory.AddItem(pgItem);
-
-            //dataGridViewInventory = new DataGridView();
             dataGridViewInventory.Dock = DockStyle.Fill;
-            //dataGridViewInventory.BringToFront();
-            //Controls.Add(dataGridViewInventory);
-
-            //DataGridViewImageColumn nameColumn = new DataGridViewImageColumn {
-            //    Name = "ItemNameColumn",
-            //    HeaderText = "Item Name"
-            //};
-            //DataGridViewImageColumn imageColumn = new DataGridViewImageColumn {
-            //    Name = "ItemImageColumn",
-            //    HeaderText = "Item Image"
-            //};
-            //dataGridViewInventory.Columns.Add(nameColumn);
-            //dataGridViewInventory.Columns.Add(imageColumn);
             dataGridViewInventory.CellFormatting += dataGridViewInventory_CellFormatting;
-            ShowInventory();
         }
 
         public static void ToggleBackgroungMusic()
@@ -145,8 +118,10 @@ namespace Fall2020_CSC403_Project
 
         private void FrmLevel_KeyUp(object sender, KeyEventArgs e)
         {
+            // this hides the inventory when you let go of 'i'
             if (e.KeyCode == Keys.I) {
                 invOpen = false;
+                ShowInventoryNow();
             }
 
             player.ResetMoveSpeed();
@@ -264,7 +239,7 @@ namespace Fall2020_CSC403_Project
                 case Keys.Down:
                     player.GoDown();
                     break;
-
+                // shows the inventory when you hold down 'i'
                 case Keys.I:
                     invOpen = true;
                     ShowInventoryNow();
