@@ -19,7 +19,10 @@ A game role playing game brought to you by Khraft Heanz™© where you can fight
 
 ## FAQ
 1. How do I win the game? 
-- Win fights against enemies and face the boss to move onto the next level.
+    - Win fights against enemies and face the boss.
+
+2. How do I see the items I have?
+    - Press i on the keyboard.
 
 ## Documentation
 https://docs.google.com/document/d/1DBjuipfmBtZ06L7kTTzp-CQQ5W9_Z07ZlMurgx23KmE
