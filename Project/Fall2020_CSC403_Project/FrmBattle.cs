@@ -24,31 +24,33 @@ namespace Fall2020_CSC403_Project
         private FrmBattle()
         {
             InitializeComponent();
-            player = Game.player;
-            PlayAudio("data/backgroundMusicPlayer.wav");
+            player = Game.player; //start background music
+            PlayAudio("data/backgroundMusicPlayer.wav"); //start background music
         }
 
+        //play audio file method
         private void PlayAudio(string filePath)
         {
             waveOut = new WaveOutEvent();
-            audioFile = new AudioFileReader(filePath);
+            audioFile = new AudioFileReader(filePath); //read audio file
             waveOut.Init(audioFile);
-            waveOut.Play();
+            waveOut.Play(); //start playing audio
         }
 
         private void SetVolume(float volume)
         {
-            if (waveOut != null)
+            if (waveOut != null) //check for non null output device
             {
-                waveOut.Volume = volume;
+                waveOut.Volume = volume; //adjust volume setting
             }
         }
 
+        //volume controll scroll event
         private void trackBarVolume_Scroll(object sender, EventArgs e)
         {
-            TrackBar trackBar = (TrackBar)sender;
+            TrackBar trackBar = (TrackBar)sender; //cast sender to trackbar
             float volume = trackBar.Value / 100f; // Convert to a scale of 0 to 1
-            SetVolume(volume);
+            SetVolume(volume); //apply volume change
         }
         public void Setup()
         {
@@ -70,16 +72,16 @@ namespace Fall2020_CSC403_Project
 
         private void getplayer()
         {
-            switch (charbattle)
+            switch (charbattle) //switch in charracterbattle
             {
                 case 1:
-                    picPlayer.BackgroundImage = Properties.Resources.cat;
+                    picPlayer.BackgroundImage = Properties.Resources.cat; //set player image to cat
                     break;
                 case 2:
-                    picPlayer.BackgroundImage = Properties.Resources.hk;
+                    picPlayer.BackgroundImage = Properties.Resources.hk; //set player image to hello kitty
                     break;
                 case 0:
-                    picPlayer.BackgroundImage = Properties.Resources.player;
+                    picPlayer.BackgroundImage = Properties.Resources.player; //set player image to default
 
                     break;
                
@@ -94,13 +96,13 @@ namespace Fall2020_CSC403_Project
             picBossBattle.Visible = true;
 
             SoundPlayer simpleSound = new SoundPlayer(Resources.final_battle);
-            simpleSound.Play();
+            simpleSound.Play(); //play the sound
 
-            string audioFilePath = "data/backgroundMusicPLayer.wav";
+            string audioFilePath = "data/backgroundMusicPLayer.wav"; //path to audio file
             waveOut = new WaveOutEvent();
             audioFile = new AudioFileReader(audioFilePath); 
-            waveOut.Init(audioFile); 
-            waveOut.Play();
+            waveOut.Init(audioFile); //initialize audio output with file reader
+            waveOut.Play(); //play audio file
             tmrFinalBattle.Enabled = true;
 
 
@@ -119,12 +121,12 @@ namespace Fall2020_CSC403_Project
 
         public static FrmBattle GetInstance(Enemy enemy, int charactorchoice)
         {
-            charbattle = charactorchoice;
+            charbattle = charactorchoice; //assign characterchoice for the battle
             if (instance == null)
             {
                 instance = new FrmBattle();
                 instance.enemy = enemy;
-                instance.Setup();
+                instance.Setup(); //set up instance with enemy and character choice
             }
             return instance;
         }

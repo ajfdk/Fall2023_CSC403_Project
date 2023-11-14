@@ -33,9 +33,7 @@ namespace Fall2020_CSC403_Project
         public FrmLevel()
         {
             InitializeComponent();
-            backgroundMusic = new SoundPlayer("data/backgroundMusicPlayer.wav");
-
-
+            backgroundMusic = new SoundPlayer("data/backgroundMusicPlayer.wav"); //set up background music player
         }
 
         private void dataGridViewInventory_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
@@ -88,21 +86,22 @@ namespace Fall2020_CSC403_Project
             dataGridViewInventory.CellFormatting += dataGridViewInventory_CellFormatting;
         }
 
+        //toggle background music state
         public static void ToggleBackgroungMusic()
         {
             if (IsMusicPlaying)
             {
-                backgroundMusic.Stop();
+                backgroundMusic.Stop(); //stop music
                 IsMusicPlaying = false;
             }
             else
             {
-                backgroundMusic.PlayLooping();
+                backgroundMusic.PlayLooping(); //play music in loop
                 IsMusicPlaying=true;
             }
         }
 
-        public void StartBackgroundMusic()
+        public void StartBackgroundMusic() //start playing background music
         {
             backgroundMusic.PlayLooping();
         }
@@ -295,7 +294,7 @@ namespace Fall2020_CSC403_Project
 
         private void Menu()
                 {
-                    if (playcontrolmenu.Visible != true)
+                    if (playcontrolmenu.Visible != true) //check if playcontrol menu is not visible
                     {
                         playcontrolmenu.Enabled = true;
                         playcontrolmenu.Visible = true;
@@ -307,29 +306,34 @@ namespace Fall2020_CSC403_Project
 
                     }
                 }
+        //event handler for Hellokitty click
         private void hellokitty_Click(object sender, EventArgs e)
         {
-            this.picPlayer.BackgroundImage = Properties.Resources.hk;
-            charactorchoice = 2;
+            this.picPlayer.BackgroundImage = Properties.Resources.hk; //set background to hello kitty
+            charactorchoice = 2; //set characterchoice to hello kitty
 
         }
+        //event handler for kitten click
         private void kitten_Click(object sender, EventArgs e)
         {
-            this.picPlayer.BackgroundImage = Properties.Resources.cat;
-            charactorchoice = 1;
+            this.picPlayer.BackgroundImage = Properties.Resources.cat; // set image to kitten
+            charactorchoice = 1; //set characterchoice to kitten
 
         }
+        //event handler for default playericon click
         private void playericon_Click(object sender, EventArgs e)
         {
 
             this.picPlayer.BackgroundImage = Properties.Resources.player;
             charactorchoice = 0;
         }
+        //enable state of character selection panel
         private void charactericon_Click(object sender, EventArgs e)
         {
+            //check if flowlayoutpanel1 is not visible
             if (flowLayoutPanel1.Visible != true)
             {
-                flowLayoutPanel1.Visible = true;
+                flowLayoutPanel1.Visible = true; 
                 flowLayoutPanel1.Enabled = true;
             }
             else
@@ -366,10 +370,13 @@ namespace Fall2020_CSC403_Project
             // place opener for settings here.
         }
 
+        //play menu click event
         private void playcontrolmenu_Click_1(object sender, EventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            Point coordinates = me.Location;
+            Point coordinates = me.Location; //get click coordinates
+
+            //check for the resume button
             if (175<coordinates.X && coordinates.X < 383 && 215 < coordinates.Y && coordinates.Y < 285)
             
             {
@@ -377,10 +384,11 @@ namespace Fall2020_CSC403_Project
                 Menu();
 
             }
+            //check for exit button
             else if (175 < coordinates.X && coordinates.X < 383 && 294 < coordinates.Y && coordinates.Y < 360)
            
             {
-                Close();
+                this.Close(); 
             }
         }
             
@@ -393,9 +401,9 @@ namespace Fall2020_CSC403_Project
                 Close();
             }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+       private void pictureBox3_Click(object sender, EventArgs e)
             {
                 CloseGame();
             }
         }
-    }
+    } 
