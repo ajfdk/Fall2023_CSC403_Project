@@ -8,10 +8,8 @@ namespace Fall2020_CSC403_Project.code {
     public class Player : BattleCharacter {
         public int gold = 0;
         public int player_gold_bag_capacity = 5000;
-        public Inventory inventory;
 
         public Player(Vector2 initPos, Collider collider) : base(initPos, collider) {
-            inventory = new Inventory();
           
         }
         // accepts an int and adds that to the players gold.
