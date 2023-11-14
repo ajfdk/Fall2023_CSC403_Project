@@ -17,9 +17,12 @@ namespace Fall2020_CSC403_Project
 
         private WaveOutEvent waveOut;
         private AudioFileReader audioFile;
-        
+
         int uses = new int();
         int used = new int();
+        int difficulty = 2;
+        bool Identified = new bool();
+        bool Deflected = new bool();
 
         private FrmBattle()
         {
@@ -55,19 +58,29 @@ namespace Fall2020_CSC403_Project
         public void Setup()
         {
             // update for this enemy
-            picEnemy.BackgroundImage = enemy.Img;
-            picEnemy.Refresh();
-            BackColor = enemy.BackgroundColor;
-            picBossBattle.Visible = false;
-            getplayer();
+            if (player.Health > 0 && enemy.Health > 0)
+            {
+                picEnemy.BackgroundImage = enemy.Img;
+                picEnemy.Refresh();
+                BackColor = enemy.BackgroundColor;
+                picBossBattle.Visible = false;
 
-            // Observer pattern as well as making the used of the heal
-            enemy.AttackEvent += PlayerDamage;
-            player.AttackEvent += EnemyDamage;
-            used = 2;
+                // Boolean values for the Identify Button
+                lblEnemyHealthFull.Visible = false;
+                lblAction.Visible = false;
+                Identified = false;
+                Deflected = false;
 
-            // show health
-            UpdateHealthBars();
+                getplayer();
+
+                // Observer pattern as well as making the used of the heal
+                enemy.AttackEvent += PlayerDamage;
+                player.AttackEvent += EnemyDamage;
+                used = 2;
+
+                // show health
+                UpdateHealthBars();
+            }
         }
 
         private void getplayer()
@@ -96,16 +109,18 @@ namespace Fall2020_CSC403_Project
             picBossBattle.Visible = true;
 
             SoundPlayer simpleSound = new SoundPlayer(Resources.final_battle);
-            simpleSound.Play(); //play the sound
+            simpleSound.Play();
 
-            string audioFilePath = "data/backgroundMusicPLayer.wav"; //path to audio file
+            string audioFilePath = "data/backgroundMusicPLayer.wav";
             waveOut = new WaveOutEvent();
-            audioFile = new AudioFileReader(audioFilePath); 
-            waveOut.Init(audioFile); //initialize audio output with file reader
-            waveOut.Play(); //play audio file
+            audioFile = new AudioFileReader(audioFilePath);
+            waveOut.Init(audioFile);
+            waveOut.Play();
             tmrFinalBattle.Enabled = true;
 
-
+            //This adjusts the bosses strength -> Strength should change based of difficulty
+            int str = (int)Math.Round(enemy.getStrength());
+            enemy.setStrength(str + 1);
         }
 
         public static FrmBattle GetInstance(Enemy enemy)
@@ -166,8 +181,8 @@ namespace Fall2020_CSC403_Project
 
 
         //This is a button to heal for a random amount but can only be used a certain set number of times
-        //It also stops the health at 20 if the heal would overflow
-        //Addeed extra functionality that shows the number of heals readily available
+        //It also stops the health at 20 if the heal would overflow, has a use count, and
+        //Label descriptors are used so show the amounts healed for
         private void btnHeal_Click(object sender, EventArgs e)
         {
             if (player.Health > 0 && enemy.Health > 0)
@@ -176,13 +191,16 @@ namespace Fall2020_CSC403_Project
                 {
                     uses++;
                     var plyrChance = new Random();
-                    player.AlterHealth(plyrChance.Next(5, 7));
+                    var lblHold = (plyrChance.Next(5, 7));
+                    player.AlterHealth(lblHold);
+                    this.lblSelf.Text = "You Healed For " + lblHold;
 
                     if (enemy.Health != 20)
                     {
                         enemy.AlterHealth(1);
+                        this.lblAction.Text = "Enemy Restored Health";
 
-                        if (enemy.Health > 20)
+                        if (enemy.Health > 20) // This section and the next make sure the health stays within the bounds of the label
                         {
                             enemy.SetHealth(20);
                         }
@@ -201,33 +219,103 @@ namespace Fall2020_CSC403_Project
         }
 
         //This is an infinite use button that has a chance to deflect the enemies attack back at them for damage
-        //Added extra functionality to show if succesful or not
+        //Descriptor labels are used to show if the random chance was successful or not
         private void btnDeflect_Click(object sender, EventArgs e)
         {
             var chance = new Random();
             var percent = chance.Next(0, 4);
+            if (difficulty == 3)
+            {
+                percent = chance.Next(0, 3);
+            }
 
             if (enemy.Health > 0 && percent > 1)
             {
                 var nmyChance = new Random();
-                enemy.OnAttack(-(nmyChance.Next(2, 6)));
-                this.btnDeflect.Text = "Failed";
+                var lbl2Hold = nmyChance.Next(2, 6);
+                enemy.OnAttack(-lbl2Hold);
+                int str = (int)Math.Round(enemy.getStrength());
+                this.lblSelf.Text = "Failed Deflect, Hit For " + (lbl2Hold * str);
+                this.lblAction.Text = "Successful Hit";
             }
 
             if (enemy.Health > 0 && percent <= 1)
             {
+                Deflected = true;
                 var plyrChance = new Random();
-                player.OnAttack(-(plyrChance.Next(5, 8)));
-                this.btnDeflect.Text = "Success";
+                var lblHold = plyrChance.Next(5, 8);
+                player.OnAttack(-lblHold);
+                this.lblSelf.Text = "Successful Deflect";
+                this.lblAction.Text = "Attack Deflected For " + lblHold;
             }
 
             UpdateHealthBars();
-            
+
             if (player.Health <= 0 || enemy.Health <= 0)
             {
                 instance = null;
                 Close();
             }
+        }
+
+        //This is a single use button to identify the enemies stats (health, strength, battle descriptors),
+        //If you have not started the battle beforehand the enemy will attack as if it were an ambush
+        private void btnIdentify_Click(object sender, EventArgs e)
+        {
+            if (player.Health > 0 && enemy.Health > 0 && difficulty != 1)
+            {
+                if (Identified == false)
+                {
+                    if (player.Health == 20 && Deflected == false)
+                    {
+                        var nmyChance = new Random();
+                        var lbl2Hold = nmyChance.Next(1, 4);
+                        enemy.OnAttack(-lbl2Hold);
+                        int str = (int)Math.Round(enemy.getStrength());
+                        this.lblSelf.Text = "Ambush Attacked, Hit For " + (lbl2Hold * str);
+                        UpdateHealthBars();
+                    }
+                    //Shows the identified stats
+                    lblEnemyHealthFull.Visible = true;
+                    lblAction.Visible = true;
+                    this.lblStr.Text = "Strength: " + enemy.getStrength();
+                    this.lblAction.Text = "Identified";
+                    Identified = true;
+                }
+            }
+        }
+
+        //This button shifts the difficulty and resets the battle (with the exception of player health)
+        private void btnDifficulty_Click(object sender, EventArgs e)
+        {
+            if (difficulty == 1)
+            {
+                this.btnDifficulty.Text = "Normal";
+                this.btnIdentify.Text = "Identify";
+                enemy.setStrength(1);
+            }
+            if (difficulty == 2)
+            {
+                this.btnDifficulty.Text = "Hard";
+                this.btnIdentify.Text = "Identify";
+                enemy.setStrength(2);
+            }
+            if (difficulty == 3)
+            {
+                this.btnDifficulty.Text = "Insane";
+                this.btnIdentify.Text = "Disabled";
+                difficulty = 0;
+            }
+            this.lblStr.Text = "Strength: ???";
+            this.btnHeal.Text = "Heal: 2";
+            lblEnemyHealthFull.Visible = false;
+            lblAction.Visible = false;
+            Identified = false;
+            Deflected = false;
+            enemy.SetHealth(20);
+            UpdateHealthBars();
+            used = 2;
+            difficulty++;
         }
 
         private void EnemyDamage(int amount)

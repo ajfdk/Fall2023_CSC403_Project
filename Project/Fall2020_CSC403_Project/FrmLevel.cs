@@ -312,18 +312,19 @@ namespace Fall2020_CSC403_Project
 
         private void Fight(Enemy enemy)
         {
-           
-            player.ResetMoveSpeed();
-            player.MoveBack();
-            frmBattle = FrmBattle.GetInstance(enemy, charactorchoice);
-            frmBattle = FrmBattle.GetInstance(enemy);
-            frmBattle.Show();
-
-            if (enemy == bossKoolaid)
+            if (enemy.Health > 0 && player.Health > 0)
             {
-                frmBattle.SetupForBossBattle();
-            }
+                player.ResetMoveSpeed();
+                player.MoveBack();
+                frmBattle = FrmBattle.GetInstance(enemy, charactorchoice);
+                frmBattle = FrmBattle.GetInstance(enemy);
+                frmBattle.Show();
 
+                if (enemy == bossKoolaid)
+                {
+                    frmBattle.SetupForBossBattle();
+                }
+            }
         }
         private void pickUpGold(Player player) {
             player.updateGold(5);
@@ -501,5 +502,5 @@ namespace Fall2020_CSC403_Project
             {
                 CloseGame();
             }
-        }
+    }
     } 
