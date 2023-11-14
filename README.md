@@ -17,6 +17,13 @@ A role playing game brought to you by Khraft Heanz™© where you can fight batt
 - `Left mouse click` to make your choice during combat.
 - `I` - holding i on the keyboard shows the inventory screen.
 
+## Combat
+- `Attack` - You and the enemy attack for a random amount of damage.
+- `Deflect` - You have a random chance to deflect the enmeies attack right back at them. This could save or kill you.
+- `Heal` - You heal for a random amount of health. But, you give the enmy time to rest.
+- `Identify` - Identify the stats of the enemy. Beware, this may cost you.
+- `Difficulty` - Change the difficulty to normal, hard, or insane.
+
 ## FAQ
 1. How do I win the game? 
     - Win fights against enemies and face the boss.
