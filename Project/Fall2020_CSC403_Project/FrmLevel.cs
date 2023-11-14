@@ -29,6 +29,8 @@ namespace Fall2020_CSC403_Project
         private int charactorchoice = 0;
 
         private bool invOpen = false;
+        private bool bossAlive = true;
+        private bool playerAlive = true;
 
         public FrmLevel()
         {
@@ -143,6 +145,40 @@ namespace Fall2020_CSC403_Project
                 player.Move();
             }
 
+            // check if boss koolaid is defeated for the first time
+            if ((bossKoolaid.Health <= 0) && bossAlive)
+            {
+                player.ResetMoveSpeed();
+                player.MoveBack();
+                bossAlive = false;
+
+                foreach (Control control in this.Controls)
+                {
+                    control.Hide();
+                }
+
+                this.tmrPlayerMove.Enabled = false;
+                this.VictoryImage.Visible = true;
+            }
+
+            if ((player.Health <= 0) && playerAlive)
+            {
+                player.ResetMoveSpeed();
+                player.MoveBack();
+                playerAlive = false;
+
+                foreach (Control control in this.Controls)
+                {
+                    control.Hide();
+                }
+
+                this.tmrPlayerMove.Enabled = false;
+                this.DefeatImage.Visible = true;
+            }
+
+            enemyCheetoMover();
+            enemyPoisonPacketMover();
+            
             // check collision with walls
             if (HitAWall(player))
             {
@@ -193,6 +229,66 @@ namespace Fall2020_CSC403_Project
             // update player's picture box
             picPlayer.Location = new Point((int)player.Position.x, (int)player.Position.y);
             updateOnGoldDisplay();
+        }
+
+        // Handles enemy Poison Packet's movement on screen.
+        private void enemyPoisonPacketMover()
+        {
+            // check collision with walls
+            if (HitAWall(enemyPoisonPacket))
+            {
+                enemyPoisonPacket.ResetMoveSpeed();
+                enemyPoisonPacket.MoveBack();
+
+                if (enemyPoisonPacket.Flip)
+                {
+                    enemyPoisonPacket.Flip = false;
+                }
+                else
+                {
+                    enemyPoisonPacket.Flip = true;
+                }
+            }
+            if (enemyPoisonPacket.Flip)
+            {
+                enemyPoisonPacket.GoUp();
+            }
+            else
+            {
+                enemyPoisonPacket.GoDown();
+            }
+            enemyPoisonPacket.Move();
+            picEnemyPoisonPacket.Location = new Point((int)enemyPoisonPacket.Position.x, (int)enemyPoisonPacket.Position.y);
+        }
+
+        // Handles enemy cheeto's movement on the screen.
+        private void enemyCheetoMover()
+        {
+            // check collision with walls
+            if (HitAWall(enemyCheeto))
+            {
+                enemyCheeto.ResetMoveSpeed();
+                enemyCheeto.MoveBack();
+
+                if (enemyCheeto.Flip)
+                {
+                    enemyCheeto.Flip = false;
+                }
+                else
+                {
+                    enemyCheeto.Flip = true;
+                }
+            }
+            if (enemyCheeto.Flip)
+            {
+                enemyCheeto.GoRight();
+            }
+            else
+            {
+                enemyCheeto.GoLeft();
+            }
+            enemyCheeto.Move();
+            picEnemyCheeto.Location = new Point((int)enemyCheeto.Position.x, (int)enemyCheeto.Position.y);
         }
 
         private bool HitAWall(Character c)

@@ -182,6 +182,8 @@
     <Content Include="data\backgroundMusicPlayer.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\VictoryScreenFinal.png" />
+    <None Include="Resources\DefeatScreenFinal.png" />
     <None Include="Resources\snuggie.png" />
     <None Include="Resources\orangecat.png" />
     <None Include="Resources\peanutgauntlet.jpg" />

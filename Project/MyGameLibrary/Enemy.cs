@@ -5,6 +5,7 @@ namespace Fall2020_CSC403_Project.code {
     public class Enemy : BattleCharacter {
 
         public Image Img { get; set; }
+        public bool Flip = false;
 
 
         public Color BackgroundColor { get; set; }
