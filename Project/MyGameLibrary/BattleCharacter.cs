@@ -35,12 +35,13 @@ namespace Fall2020_CSC403_Project.code {
             return strength;
         }
           
-        //added a set health function that sets the health of the character chosen to a specific integer
+        //set health function that sets the health of the character chosen to a specific integer
         public void SetHealth(int amount)
         {
             Health = amount;
         }
 
+        //set stregth function that sets the strength of the character chosen to a specific integer
         public void setStrength(int amount)
         {
             strength = amount;

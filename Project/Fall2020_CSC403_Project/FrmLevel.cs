@@ -171,7 +171,7 @@ namespace Fall2020_CSC403_Project
 
         private void Fight(Enemy enemy)
         {
-            if (enemy.Health > 0)
+            if (enemy.Health > 0 && player.Health > 0)
             {
                 player.ResetMoveSpeed();
                 player.MoveBack();
@@ -218,6 +218,7 @@ namespace Fall2020_CSC403_Project
                     CharacterScreen character = new CharacterScreen();
                     character.Show();
                     break;
+                // open the menu
                 case Keys.M:
                     pause = true;
                     Menu();

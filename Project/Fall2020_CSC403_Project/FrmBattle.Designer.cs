@@ -43,6 +43,8 @@
             this.lblStr = new System.Windows.Forms.Label();
             this.lblAction = new System.Windows.Forms.Label();
             this.lblSelf = new System.Windows.Forms.Label();
+            this.btnDifficulty = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBossBattle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEnemy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
@@ -124,36 +126,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(229, 23);
             this.label2.TabIndex = 5;
-            // 
-            // lblStr
-            // 
-            this.lblStr.AutoSize = true;
-            this.lblStr.Location = new System.Drawing.Point(512, 44);
-            this.lblStr.Name = "lblStr";
-            this.lblStr.Size = new System.Drawing.Size(71, 13);
-            this.lblStr.TabIndex = 16;
-            this.lblStr.Text = "Strength: ???";
-            // 
-            // lblAction
-            // 
-            this.lblAction.AutoSize = true;
-            this.lblAction.BackColor = System.Drawing.Color.Gainsboro;
-            this.lblAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAction.Location = new System.Drawing.Point(515, 82);
-            this.lblAction.Name = "lblAction";
-            this.lblAction.Size = new System.Drawing.Size(16, 13);
-            this.lblAction.TabIndex = 17;
-            this.lblAction.Text = "...";
-            // 
-            // lblSelf
-            // 
-            this.lblSelf.AutoSize = true;
-            this.lblSelf.BackColor = System.Drawing.Color.Gainsboro;
-            this.lblSelf.Location = new System.Drawing.Point(70, 82);
-            this.lblSelf.Name = "lblSelf";
-            this.lblSelf.Size = new System.Drawing.Size(16, 13);
-            this.lblSelf.TabIndex = 18;
-            this.lblSelf.Text = "...";
             // 
             // lblEnemyHealthFull
             // 
@@ -242,6 +214,55 @@
             this.trackBar4.TabIndex = 14;
             this.trackBar4.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
             // 
+            // lblStr
+            // 
+            this.lblStr.AutoSize = true;
+            this.lblStr.Location = new System.Drawing.Point(512, 44);
+            this.lblStr.Name = "lblStr";
+            this.lblStr.Size = new System.Drawing.Size(71, 13);
+            this.lblStr.TabIndex = 16;
+            this.lblStr.Text = "Strength: ???";
+            // 
+            // lblAction
+            // 
+            this.lblAction.AutoSize = true;
+            this.lblAction.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAction.Location = new System.Drawing.Point(515, 82);
+            this.lblAction.Name = "lblAction";
+            this.lblAction.Size = new System.Drawing.Size(16, 13);
+            this.lblAction.TabIndex = 17;
+            this.lblAction.Text = "...";
+            // 
+            // lblSelf
+            // 
+            this.lblSelf.AutoSize = true;
+            this.lblSelf.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblSelf.Location = new System.Drawing.Point(70, 82);
+            this.lblSelf.Name = "lblSelf";
+            this.lblSelf.Size = new System.Drawing.Size(16, 13);
+            this.lblSelf.TabIndex = 18;
+            this.lblSelf.Text = "...";
+            // 
+            // btnDifficulty
+            // 
+            this.btnDifficulty.Location = new System.Drawing.Point(365, 60);
+            this.btnDifficulty.Name = "btnDifficulty";
+            this.btnDifficulty.Size = new System.Drawing.Size(75, 35);
+            this.btnDifficulty.TabIndex = 19;
+            this.btnDifficulty.Text = "Normal";
+            this.btnDifficulty.UseVisualStyleBackColor = true;
+            this.btnDifficulty.Click += new System.EventHandler(this.btnDifficulty_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(377, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Difficulty:";
+            // 
             // FrmBattle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +270,7 @@
             this.BackColor = System.Drawing.Color.Gray;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(810, 592);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.picBossBattle);
             this.Controls.Add(this.lblEnemyHealthFull);
             this.Controls.Add(this.label2);
@@ -264,6 +286,7 @@
             this.Controls.Add(this.btnDeflect);
             this.Controls.Add(this.btnHeal);
             this.Controls.Add(this.btnIdentify);
+            this.Controls.Add(this.btnDifficulty);
             this.Controls.Add(this.picEnemy);
             this.Controls.Add(this.picPlayer);
             this.DoubleBuffered = true;
@@ -290,18 +313,20 @@
         private System.Windows.Forms.Button btnHeal;
         private System.Windows.Forms.Button btnDeflect;
         private System.Windows.Forms.Button btnIdentify;
+        private System.Windows.Forms.Button btnDifficulty;
         private System.Windows.Forms.Label lblPlayerHealthFull;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblStr;
         private System.Windows.Forms.Label lblAction;
         private System.Windows.Forms.Label lblEnemyHealthFull;
+        private System.Windows.Forms.Label lblSelf;
         private System.Windows.Forms.PictureBox picBossBattle;
         private System.Windows.Forms.Timer tmrFinalBattle;
         private System.Windows.Forms.TrackBar trackBarVolume;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.TrackBar trackBar3;
         private System.Windows.Forms.TrackBar trackBar4;
-        private System.Windows.Forms.Label lblSelf;
+        private System.Windows.Forms.Label label3;
     }
 }

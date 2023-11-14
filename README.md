@@ -10,17 +10,11 @@ A game role playing game brought to you by Khraft Heanz™© where you can fight
 - Fight bosses to move on to the next level
 - Collect items to help you win
 
+
 ## Controls
 - Arrow Keys - Move your character around the screen.
 - ESC - Open the menu.
-- M - Open and close the main menu.
 - Right mouse click to make your choice during combat.
-
-## Combat
-- Attack - Both you and the enemy attack for a random amount of damage.
-- Heal - You heal for a large random amount while the enemy heals a single point.
-- Deflect - You have a percent chance to deflect the enemies attack right back at them.
-- Identify - You identify the enemies stats as well as action numbers. Beware, doing this may cost you.
 
 ## FAQ
 1. How do I win the game? 

@@ -5,14 +5,15 @@ using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
 using NAudio.Wave;
+using System.Runtime.CompilerServices;
 
 namespace Fall2020_CSC403_Project
 {
     public partial class FrmBattle : Form
     {
         public static FrmBattle instance = null;
-        private Enemy enemy;
-        private Player player;
+        public Enemy enemy;
+        public Player player;
         private static int charbattle;
 
         private WaveOutEvent waveOut;
@@ -20,6 +21,7 @@ namespace Fall2020_CSC403_Project
         
         int uses = new int();
         int used = new int();
+        int difficulty = 2;
         bool Identified = new bool();
         bool Deflected = new bool();
 
@@ -55,23 +57,29 @@ namespace Fall2020_CSC403_Project
         public void Setup()
         {
             // update for this enemy
-            picEnemy.BackgroundImage = enemy.Img;
-            picEnemy.Refresh();
-            BackColor = enemy.BackgroundColor;
-            picBossBattle.Visible = false;
-            lblEnemyHealthFull.Visible = false;
-            lblAction.Visible = false;
-            Identified = false;
-            Deflected = false;
-            getplayer();
+            if (player.Health > 0 && enemy.Health > 0)
+            {
+                picEnemy.BackgroundImage = enemy.Img;
+                picEnemy.Refresh();
+                BackColor = enemy.BackgroundColor;
+                picBossBattle.Visible = false;
 
-            // Observer pattern as well as making the used of the heal
-            enemy.AttackEvent += PlayerDamage;
-            player.AttackEvent += EnemyDamage;
-            used = 2;
+                // Boolean values for the Identify Button
+                lblEnemyHealthFull.Visible = false;
+                lblAction.Visible = false;
+                Identified = false;
+                Deflected = false;
 
-            // show health
-            UpdateHealthBars();
+                getplayer();
+
+                // Observer pattern as well as making the used of the heal
+                enemy.AttackEvent += PlayerDamage;
+                player.AttackEvent += EnemyDamage;
+                used = 2;
+
+                // show health
+                UpdateHealthBars();
+            }
         }
 
         private void getplayer()
@@ -109,7 +117,9 @@ namespace Fall2020_CSC403_Project
             waveOut.Play();
             tmrFinalBattle.Enabled = true;
 
-
+            //This adjusts the bosses strength -> Strength should change based of difficulty
+            int str = (int)Math.Round(enemy.getStrength());
+            enemy.setStrength(str + 1);
         }
 
         public static FrmBattle GetInstance(Enemy enemy)
@@ -149,20 +159,44 @@ namespace Fall2020_CSC403_Project
 
         }
 
-
         //This is a button that makes the player and enemy both attack for random amounts of damage
         private void btnAttack_Click(object sender, EventArgs e) {
             var plyrChance = new Random();
-            var lblHold = (plyrChance.Next(2, 10));
-            player.OnAttack(-lblHold);
-            this.lblAction.Text = "Enemy Hit For " + lblHold;
+            var chance = new Random();
+            var plyrPercent = chance.Next(2, 10);
+            var enmyPercent = chance.Next(3, 9);
+
+            if (difficulty == 2) // If the difficulty is normal
+            {
+                var lblHold = (plyrChance.Next(2, 10)); // These hold the random chance so that hte label can showcase them
+                if (lblHold == plyrPercent)
+                {
+                    player.OnAttack(-lblHold);              // Subsequently they are used in these locations for ease of use
+                    this.lblAction.Text = "Enemy Hit For " + lblHold;
+                }
+                else { this.lblAction.Text = "Enemy Has Dodged Your Attack"; }
+            }         
+            else
+            {
+                var lblHold = (plyrChance.Next(2, 7));
+                if (lblHold == plyrPercent)
+                {
+                    player.OnAttack(-lblHold);
+                    this.lblAction.Text = "Enemy Hit For " + lblHold;
+                }
+                else { this.lblAction.Text = "Enemy Has Dodged Your Attack"; }
+            }
 
             if (enemy.Health > 0) {
-
                 var nmyChance = new Random();
                 var lbl2Hold = (nmyChance.Next(3, 9));
-                enemy.OnAttack(-lbl2Hold);
-                this.lblSelf.Text = "You Were Hit For " + lbl2Hold;
+                if (lbl2Hold != enmyPercent)
+                {
+                    enemy.OnAttack(-lbl2Hold);
+                    int str = (int)Math.Round(enemy.getStrength());
+                    this.lblSelf.Text = "You Were Hit For " + (lbl2Hold * str);
+                }
+                else { this.lblSelf.Text = "You Have Dodged Their Attack"; }
             }
 
             UpdateHealthBars();
@@ -194,7 +228,7 @@ namespace Fall2020_CSC403_Project
                         enemy.AlterHealth(1);
                         this.lblAction.Text = "Enemy Restored Health";
 
-                        if (enemy.Health > 20)
+                        if (enemy.Health > 20) // This section and the next make sure the health stays within the bounds of the label
                         {
                             enemy.SetHealth(20);
                         }
@@ -218,13 +252,18 @@ namespace Fall2020_CSC403_Project
         {
             var chance = new Random();
             var percent = chance.Next(0, 4);
+            if (difficulty == 3)
+            {
+                percent = chance.Next(0, 3);
+            }
 
             if (enemy.Health > 0 && percent > 1)
             {
                 var nmyChance = new Random();
                 var lbl2Hold = nmyChance.Next(2, 6);
                 enemy.OnAttack(-lbl2Hold);
-                this.lblSelf.Text = "Failed Deflect, Hit For " + lbl2Hold;
+                int str = (int)Math.Round(enemy.getStrength());
+                this.lblSelf.Text = "Failed Deflect, Hit For " + (lbl2Hold * str);
                 this.lblAction.Text = "Successful Hit";
             }
 
@@ -248,27 +287,65 @@ namespace Fall2020_CSC403_Project
         }
 
         //This is a single use button to identify the enemies stats (health, strength, battle descriptors),
-        //
+        //If you have not started the battle beforehand the enemy will attack as if it were an ambush
         private void btnIdentify_Click(object sender, EventArgs e)
         {
-            if (Identified == false)
+            if (player.Health > 0 && enemy.Health > 0 && difficulty != 1)
             {
-                if (player.Health == 20 && Deflected == false)
+                if (Identified == false)
                 {
-                    var nmyChance = new Random();
-                    var lbl2Hold = nmyChance.Next(2, 4);
-                    enemy.OnAttack(-lbl2Hold);
-                    this.lblSelf.Text = "Ambush Attacked, Hit For " + lbl2Hold;
-                    UpdateHealthBars();
+                    if (player.Health == 20 && Deflected == false)
+                    {
+                        var nmyChance = new Random();
+                        var lbl2Hold = nmyChance.Next(1, 4);
+                        enemy.OnAttack(-lbl2Hold);
+                        int str = (int)Math.Round(enemy.getStrength());
+                        this.lblSelf.Text = "Ambush Attacked, Hit For " + (lbl2Hold * str);
+                        UpdateHealthBars();
+                    }
+                    //Shows the identified stats
+                    lblEnemyHealthFull.Visible = true;
+                    lblAction.Visible = true;
+                    this.lblStr.Text = "Strength: " + enemy.getStrength();
+                    this.lblAction.Text = "Identified";
+                    Identified = true;
                 }
-                lblEnemyHealthFull.Visible = true;
-                lblAction.Visible = true;
-                this.lblStr.Text = "Strength: " + player.getStrength();
-                this.lblAction.Text = "Identified";
-                Identified = true;
             }
-
         }
+
+        //This button shifts the difficulty and resets the battle (with the exception of player health)
+        private void btnDifficulty_Click(object sender, EventArgs e)
+        {
+            if (difficulty == 1)
+            {
+                this.btnDifficulty.Text = "Normal";
+                this.btnIdentify.Text = "Identify";
+                enemy.setStrength(1);
+            }
+            if (difficulty == 2)
+            {
+                this.btnDifficulty.Text = "Hard";
+                this.btnIdentify.Text = "Identify";
+                enemy.setStrength(2);
+            }
+            if (difficulty == 3)
+            {
+                this.btnDifficulty.Text = "Insane";
+                this.btnIdentify.Text = "Disabled";
+                difficulty = 0;
+            }
+            this.lblStr.Text = "Strength: ???";
+            this.btnHeal.Text = "Heal: 2";
+            lblEnemyHealthFull.Visible = false;
+            lblAction.Visible = false;
+            Identified = false;
+            Deflected = false;
+            enemy.SetHealth(20);
+            UpdateHealthBars();
+            used = 2;
+            difficulty++;
+        }
+
 
             private void EnemyDamage(int amount)
         {
